@@ -58,64 +58,61 @@ should_restore_from_r2() {
     fi
 }
 
+# Evaluate restore decision once, before any restore operations.
+# This avoids a race where the config restore copies .last-sync into $CONFIG_DIR,
+# making subsequent should_restore_from_r2 calls return false (timestamps match).
+DO_RESTORE=false
+if should_restore_from_r2; then
+    DO_RESTORE=true
+fi
+
 # Check for backup data in new openclaw/ prefix first, then legacy clawdbot/ prefix
-if [ -f "$BACKUP_DIR/openclaw/openclaw.json" ]; then
-    if should_restore_from_r2; then
-        echo "Restoring from R2 backup at $BACKUP_DIR/openclaw..."
-        cp -a "$BACKUP_DIR/openclaw/." "$CONFIG_DIR/"
-        cp -f "$BACKUP_DIR/.last-sync" "$CONFIG_DIR/.last-sync" 2>/dev/null || true
-        echo "Restored config from R2 backup"
-    fi
-elif [ -f "$BACKUP_DIR/clawdbot/clawdbot.json" ]; then
+if [ "$DO_RESTORE" = true ] && [ -f "$BACKUP_DIR/openclaw/openclaw.json" ]; then
+    echo "Restoring from R2 backup at $BACKUP_DIR/openclaw..."
+    cp -a "$BACKUP_DIR/openclaw/." "$CONFIG_DIR/"
+    cp -f "$BACKUP_DIR/.last-sync" "$CONFIG_DIR/.last-sync" 2>/dev/null || true
+    echo "Restored config from R2 backup"
+elif [ "$DO_RESTORE" = true ] && [ -f "$BACKUP_DIR/clawdbot/clawdbot.json" ]; then
     # Legacy backup format — migrate .clawdbot data into .openclaw
-    if should_restore_from_r2; then
-        echo "Restoring from legacy R2 backup at $BACKUP_DIR/clawdbot..."
-        cp -a "$BACKUP_DIR/clawdbot/." "$CONFIG_DIR/"
-        cp -f "$BACKUP_DIR/.last-sync" "$CONFIG_DIR/.last-sync" 2>/dev/null || true
-        # Rename the config file if it has the old name
-        if [ -f "$CONFIG_DIR/clawdbot.json" ] && [ ! -f "$CONFIG_FILE" ]; then
-            mv "$CONFIG_DIR/clawdbot.json" "$CONFIG_FILE"
-        fi
-        echo "Restored and migrated config from legacy R2 backup"
+    echo "Restoring from legacy R2 backup at $BACKUP_DIR/clawdbot..."
+    cp -a "$BACKUP_DIR/clawdbot/." "$CONFIG_DIR/"
+    cp -f "$BACKUP_DIR/.last-sync" "$CONFIG_DIR/.last-sync" 2>/dev/null || true
+    if [ -f "$CONFIG_DIR/clawdbot.json" ] && [ ! -f "$CONFIG_FILE" ]; then
+        mv "$CONFIG_DIR/clawdbot.json" "$CONFIG_FILE"
     fi
-elif [ -f "$BACKUP_DIR/clawdbot.json" ]; then
+    echo "Restored and migrated config from legacy R2 backup"
+elif [ "$DO_RESTORE" = true ] && [ -f "$BACKUP_DIR/clawdbot.json" ]; then
     # Very old legacy backup format (flat structure)
-    if should_restore_from_r2; then
-        echo "Restoring from flat legacy R2 backup at $BACKUP_DIR..."
-        cp -a "$BACKUP_DIR/." "$CONFIG_DIR/"
-        cp -f "$BACKUP_DIR/.last-sync" "$CONFIG_DIR/.last-sync" 2>/dev/null || true
-        if [ -f "$CONFIG_DIR/clawdbot.json" ] && [ ! -f "$CONFIG_FILE" ]; then
-            mv "$CONFIG_DIR/clawdbot.json" "$CONFIG_FILE"
-        fi
-        echo "Restored and migrated config from flat legacy R2 backup"
+    echo "Restoring from flat legacy R2 backup at $BACKUP_DIR..."
+    cp -a "$BACKUP_DIR/." "$CONFIG_DIR/"
+    cp -f "$BACKUP_DIR/.last-sync" "$CONFIG_DIR/.last-sync" 2>/dev/null || true
+    if [ -f "$CONFIG_DIR/clawdbot.json" ] && [ ! -f "$CONFIG_FILE" ]; then
+        mv "$CONFIG_DIR/clawdbot.json" "$CONFIG_FILE"
     fi
+    echo "Restored and migrated config from flat legacy R2 backup"
 elif [ -d "$BACKUP_DIR" ]; then
     echo "R2 mounted at $BACKUP_DIR but no backup data found yet"
 else
     echo "R2 not mounted, starting fresh"
 fi
 
-# Restore workspace from R2 backup if available (only if R2 is newer)
+# Restore workspace from R2 backup if available
 # This includes IDENTITY.md, USER.md, MEMORY.md, memory/, and assets/
 WORKSPACE_DIR="/root/clawd"
-if [ -d "$BACKUP_DIR/workspace" ] && [ "$(ls -A $BACKUP_DIR/workspace 2>/dev/null)" ]; then
-    if should_restore_from_r2; then
-        echo "Restoring workspace from $BACKUP_DIR/workspace..."
-        mkdir -p "$WORKSPACE_DIR"
-        cp -a "$BACKUP_DIR/workspace/." "$WORKSPACE_DIR/"
-        echo "Restored workspace from R2 backup"
-    fi
+if [ "$DO_RESTORE" = true ] && [ -d "$BACKUP_DIR/workspace" ] && [ "$(ls -A $BACKUP_DIR/workspace 2>/dev/null)" ]; then
+    echo "Restoring workspace from $BACKUP_DIR/workspace..."
+    mkdir -p "$WORKSPACE_DIR"
+    cp -a "$BACKUP_DIR/workspace/." "$WORKSPACE_DIR/"
+    echo "Restored workspace from R2 backup"
 fi
 
-# Restore skills from R2 backup if available (only if R2 is newer)
+# Restore skills from R2 backup if available
 SKILLS_DIR="/root/clawd/skills"
-if [ -d "$BACKUP_DIR/skills" ] && [ "$(ls -A $BACKUP_DIR/skills 2>/dev/null)" ]; then
-    if should_restore_from_r2; then
-        echo "Restoring skills from $BACKUP_DIR/skills..."
-        mkdir -p "$SKILLS_DIR"
-        cp -a "$BACKUP_DIR/skills/." "$SKILLS_DIR/"
-        echo "Restored skills from R2 backup"
-    fi
+if [ "$DO_RESTORE" = true ] && [ -d "$BACKUP_DIR/skills" ] && [ "$(ls -A $BACKUP_DIR/skills 2>/dev/null)" ]; then
+    echo "Restoring skills from $BACKUP_DIR/skills..."
+    mkdir -p "$SKILLS_DIR"
+    cp -a "$BACKUP_DIR/skills/." "$SKILLS_DIR/"
+    echo "Restored skills from R2 backup"
 fi
 
 # ============================================================
