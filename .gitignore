@@ -33,3 +33,22 @@
 
 # Rider
 .idea/
+
+# Node / TypeScript / Cloudflare
+node_modules/
+dist/
+*.log
+.env
+.env.*
+!.env.example
+.dev.vars
+.wrangler/
+*.local
+
+# OpenClaw / agent runtime (local only - contains secrets, devices, sessions)
+.openclaw/
+.openclaw/**
+
+# OS
+.DS_Store
+Thumbs.db
