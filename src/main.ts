@@ -4,6 +4,7 @@ import { BootScene } from './scenes/BootScene';
 import { MapScene } from './scenes/MapScene';
 import { MenuScene } from './scenes/MenuScene';
 import { RunVictoryScene } from './scenes/RunVictoryScene';
+import { SetupScene } from './scenes/SetupScene';
 import { ShopScene } from './scenes/ShopScene';
 import { GAME_H, GAME_W } from './ui/theme';
 import './style.css';
@@ -18,7 +19,7 @@ const game = new Phaser.Game({
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
   },
-  scene: [BootScene, MenuScene, MapScene, BattleScene, ShopScene, RunVictoryScene],
+  scene: [BootScene, MenuScene, SetupScene, MapScene, BattleScene, ShopScene, RunVictoryScene],
 });
 
 // handy for debugging and automated play-testing

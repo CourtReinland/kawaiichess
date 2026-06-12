@@ -47,6 +47,18 @@ const ELITE_BONUS: PieceKind[] = ['ninja', 'magicalGirl', 'rook'];
 
 export const MAX_ARMY = 12;
 
+/** Gold budget for drafting the starting army (king is free). */
+export const DRAFT_BUDGET = 30;
+
+export interface SavedRun {
+  army: PieceKind[];
+  gold: number;
+  layer: number;
+  layers: MapNode[][];
+  chosen: (number | null)[];
+  shopStock: ShopOffer[];
+}
+
 export class Run {
   army: PieceKind[] = ['king', 'knight', 'bishop', 'pawn', 'pawn'];
   gold = 10;
@@ -117,6 +129,27 @@ export class Run {
   completeNode(node: MapNode): void {
     this.chosen[node.layer] = node.index;
     this.layer = node.layer + 1;
+  }
+
+  serialize(): SavedRun {
+    return {
+      army: [...this.army],
+      gold: this.gold,
+      layer: this.layer,
+      layers: this.layers,
+      chosen: [...this.chosen],
+      shopStock: [...this.shopStock],
+    };
+  }
+
+  static deserialize(data: SavedRun): Run {
+    const run = new Run(data.layers);
+    run.army = [...data.army];
+    run.gold = data.gold;
+    run.layer = data.layer;
+    run.chosen = data.chosen.map((c) => (c === null ? undefined : c)) as number[];
+    run.shopStock = [...data.shopStock];
+    return run;
   }
 }
 

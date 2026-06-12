@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import type { MapNode, Run } from '../core/run';
+import { saveRun } from '../core/save';
 import { COLORS, FONT, GAME_H, GAME_W, makeTitle } from '../ui/theme';
 import { coverFit } from './MenuScene';
 
@@ -24,6 +25,7 @@ export class MapScene extends Phaser.Scene {
 
   create(): void {
     const run = this.registry.get('run') as Run;
+    saveRun(run); // checkpoint: arriving at the map in any state
     const bg = this.add.image(GAME_W / 2, GAME_H / 2, 'bg_table');
     coverFit(bg);
     this.add.rectangle(GAME_W / 2, GAME_H / 2, GAME_W, GAME_H, 0xfff4f7, 0.62);

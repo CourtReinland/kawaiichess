@@ -51,6 +51,18 @@ export const PIECE_VALUE: Record<PieceKind, number> = {
   king: 1000,
 };
 
+export const PIECE_MOVE: Record<PieceKind, string> = {
+  pawn: 'Steps forward, captures diagonally',
+  sakuraPawn: 'Pawn moves + sideways steps',
+  knight: 'Jumps in an L shape',
+  bishop: 'Slides diagonally',
+  rook: 'Slides in straight lines',
+  ninja: 'Knight jumps + 1-square diagonal step',
+  magicalGirl: 'Rook moves + barrier blocks first capture',
+  queen: 'Slides any direction',
+  king: 'One step any direction — protect her!',
+};
+
 export const PIECE_NAME: Record<PieceKind, string> = {
   pawn: 'Schoolgirl Pawn',
   sakuraPawn: 'Sakura Pawn',

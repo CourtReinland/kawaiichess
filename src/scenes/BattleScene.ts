@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import { chooseEnemyMove } from '../core/ai';
 import { Battle } from '../core/battle';
 import { deployment, type MapNode, type Run } from '../core/run';
+import { clearSave, saveRun } from '../core/save';
 import { PIECE_NAME, type Move, type Piece, type Pos } from '../core/types';
 import { COLORS, FONT, GAME_H, GAME_W, makeButton, makeTitle } from '../ui/theme';
 import { tokenKey } from '../ui/tokens';
@@ -253,6 +254,8 @@ export class BattleScene extends Phaser.Scene {
     const reward = this.run.goldRewardFor(this.node);
     this.run.gold += reward;
     this.run.completeNode(this.node);
+    if (this.run.done) clearSave();
+    else saveRun(this.run);
 
     const dim = this.add.rectangle(GAME_W / 2, GAME_H / 2, GAME_W, GAME_H, 0x000000, 0.45).setDepth(30);
     const banner = this.add.image(GAME_W / 2, GAME_H / 2 - 160, 'banner_victory').setDepth(31);
@@ -278,6 +281,7 @@ export class BattleScene extends Phaser.Scene {
   }
 
   private showDefeat(): void {
+    clearSave(); // the run dies with the king
     const dim = this.add.rectangle(GAME_W / 2, GAME_H / 2, GAME_W, GAME_H, 0x2a1030, 0.72).setDepth(30);
     dim.setInteractive();
     makeTitle(this, GAME_W / 2, GAME_H / 2 - 120, 'Your King fell…', 56, COLORS.textWhite).setDepth(31);

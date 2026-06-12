@@ -1,6 +1,6 @@
 import { Battle } from '../src/core/battle';
 import { chooseEnemyMove } from '../src/core/ai';
-import { deployment } from '../src/core/run';
+import { deployment, Run } from '../src/core/run';
 
 let failures = 0;
 function check(name: string, cond: boolean): void {
@@ -106,6 +106,22 @@ function check(name: string, cond: boolean): void {
   const king = spots.find((s) => s.kind === 'king')!;
   check('king centered on back row', king.x === 3 && king.y === 0);
   check('pawns on front row', spots.filter((s) => s.kind === 'pawn').every((s) => s.y === 1));
+}
+
+// --- run save round-trip through JSON (as localStorage stores it) ---
+{
+  const run = new Run();
+  run.gold = 42;
+  run.army.push('ninja', 'magicalGirl');
+  run.completeNode(run.layers[0][0]);
+  run.rollShop();
+  const restored = Run.deserialize(JSON.parse(JSON.stringify(run.serialize())));
+  check('save round-trip: gold', restored.gold === 42);
+  check('save round-trip: army', restored.army.join() === run.army.join());
+  check('save round-trip: layer', restored.layer === 1);
+  check('save round-trip: map shape', JSON.stringify(restored.layers) === JSON.stringify(run.layers));
+  check('save round-trip: shop stock', JSON.stringify(restored.shopStock) === JSON.stringify(run.shopStock));
+  check('save round-trip: chosen path', restored.chosen[0] === 0);
 }
 
 console.log(failures === 0 ? '\nALL TESTS PASSED' : `\n${failures} FAILURES`);

@@ -14,7 +14,24 @@ export const PIECE_ART: Record<PieceKind, string> = {
   king: 'art_king',
 };
 
-/** Badge emoji rendered on variants that share art with a base piece. */
+/**
+ * Identity chip per piece kind: a chess glyph on a colored disc at the
+ * bottom of the token, so pieces read at board size. Variants that share
+ * art with a base piece get a distinct chip color + corner emoji.
+ */
+const CHIP: Record<PieceKind, { glyph: string; fill: string; glyphColor: string }> = {
+  pawn: { glyph: '♟', fill: '#ffffff', glyphColor: '#5a3a52' },
+  sakuraPawn: { glyph: '♟', fill: '#ff9ec4', glyphColor: '#ffffff' },
+  knight: { glyph: '♞', fill: '#ffffff', glyphColor: '#5a3a52' },
+  ninja: { glyph: '♞', fill: '#3a2d5c', glyphColor: '#ffffff' },
+  bishop: { glyph: '♝', fill: '#ffffff', glyphColor: '#5a3a52' },
+  rook: { glyph: '♜', fill: '#ffffff', glyphColor: '#5a3a52' },
+  magicalGirl: { glyph: '♜', fill: '#c44bd1', glyphColor: '#ffffff' },
+  queen: { glyph: '♛', fill: '#ffffff', glyphColor: '#d4548c' },
+  king: { glyph: '♚', fill: '#f5c542', glyphColor: '#ffffff' },
+};
+
+/** Corner emoji rendered on variants that share art with a base piece. */
 const BADGE: Partial<Record<PieceKind, string>> = {
   ninja: '🌙',
   magicalGirl: '✨',
@@ -29,7 +46,8 @@ export function tokenKey(kind: PieceKind, side: Side): string {
 
 /**
  * Pre-render every piece token as a circular face crop of the source art,
- * ringed in the team color. Call once after art is loaded.
+ * ringed in the team color, with an identity chip. Call once after art
+ * is loaded.
  */
 export function generateTokens(scene: Phaser.Scene): void {
   const kinds = Object.keys(PIECE_ART) as PieceKind[];
@@ -63,10 +81,11 @@ export function generateTokens(scene: Phaser.Scene): void {
 
       // team ring
       const ring = side === 'player' ? COLORS.pink : COLORS.purple;
+      const ringCss = `#${ring.toString(16).padStart(6, '0')}`;
       ctx.beginPath();
       ctx.arc(cx, cx, radius, 0, Math.PI * 2);
       ctx.lineWidth = 9;
-      ctx.strokeStyle = `#${ring.toString(16).padStart(6, '0')}`;
+      ctx.strokeStyle = ringCss;
       ctx.stroke();
       ctx.beginPath();
       ctx.arc(cx, cx, radius - 6, 0, Math.PI * 2);
@@ -74,12 +93,29 @@ export function generateTokens(scene: Phaser.Scene): void {
       ctx.strokeStyle = 'rgba(255,255,255,0.9)';
       ctx.stroke();
 
+      // identity chip: chess glyph on a colored disc, bottom center
+      const chip = CHIP[kind];
+      const chipR = 30;
+      const chipY = TOKEN_SIZE - chipR - 4;
+      ctx.beginPath();
+      ctx.arc(cx, chipY, chipR, 0, Math.PI * 2);
+      ctx.fillStyle = chip.fill;
+      ctx.fill();
+      ctx.lineWidth = 4;
+      ctx.strokeStyle = ringCss;
+      ctx.stroke();
+      ctx.font = '42px "Arial Unicode MS", serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillStyle = chip.glyphColor;
+      ctx.fillText(chip.glyph, cx, chipY + 2);
+
       const badge = BADGE[kind];
       if (badge) {
-        ctx.font = '34px sans-serif';
+        ctx.font = '36px sans-serif';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.fillText(badge, TOKEN_SIZE - 30, TOKEN_SIZE - 28);
+        ctx.fillText(badge, TOKEN_SIZE - 28, 30);
       }
       tex.refresh();
     }

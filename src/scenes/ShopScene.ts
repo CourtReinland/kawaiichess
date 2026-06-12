@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import { MAX_ARMY, type MapNode, type Run } from '../core/run';
+import { saveRun } from '../core/save';
 import { PIECE_NAME } from '../core/types';
 import { COLORS, FONT, GAME_H, GAME_W, makeButton, makeTitle } from '../ui/theme';
 import { tokenKey } from '../ui/tokens';
@@ -80,6 +81,7 @@ export class ShopScene extends Phaser.Scene {
       card.on('pointerup', () => {
         const idx = run.shopStock.indexOf(offer);
         if (run.buy(idx)) {
+          saveRun(run);
           this.refreshHud(run);
           this.drawOffers(run); // re-render remaining stock
         } else {
