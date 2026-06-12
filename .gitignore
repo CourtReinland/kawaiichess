@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# capacitor/gradle
+.gradle-home/
+android/local.properties
