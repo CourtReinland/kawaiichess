@@ -17,9 +17,9 @@ interface Board3DProps {
 
 const BOARD_SIZE = 8;
 const HALF = BOARD_SIZE / 2;
-const TILE_SIZE = 0.96;
-const TILE_THICKNESS = 0.04;
-const TILE_TOP_Y = TILE_THICKNESS;
+const TILE_TOP_Y = 0;
+const TILE_TEXTURE_INSET = 0.105;
+const TILE_TEXTURE_REPEAT = 0.79;
 
 function supportsWebGL(): boolean {
   try {
@@ -57,31 +57,26 @@ function useBoardTexture(theme?: string): THREE.Texture | null {
   return path ? (Array.isArray(texture) ? texture[0] : texture) : null;
 }
 
-const TILE_COLORS: Record<string, { light: string; dark: string }> = {
-  alishan: { light: '#fff0f5', dark: '#ffb7d5' },
-  'seishin-high': { light: '#d4f0d4', dark: '#5a6f9e' },
-  'candy-forest-prep': { light: '#fff0f5', dark: '#ffb7d5' },
-  'thunder-samurai-institute': { light: '#f0f4ff', dark: '#8da9c4' },
-  'kitsune-illusion-academy': { light: '#fff8f0', dark: '#ffcdb2' },
-  'celestial-mage-collegium': { light: '#f0f6ff', dark: '#a9b4c2' },
-  'final-boss-throne-academy': { light: '#fff0f3', dark: '#c77dff' },
-  'yami-no-gakuen': { light: '#f0f0f0', dark: '#8e9aaf' },
-};
-
-function getTileColors(theme?: string): { light: string; dark: string } {
-  return TILE_COLORS[theme ?? 'alishan'] ?? TILE_COLORS.alishan;
-}
-
 function BaseBoard({ theme }: { theme?: string }) {
   const texture = useBoardTexture(theme);
+  const sideMat = useMemo(() => new THREE.MeshStandardMaterial({ color: '#5a4a52', roughness: 0.6 }), []);
+  const topMat = useMemo(() => {
+    if (!texture) return new THREE.MeshStandardMaterial({ color: '#fff0f5' });
+    texture.offset.set(TILE_TEXTURE_INSET, TILE_TEXTURE_INSET);
+    texture.repeat.set(TILE_TEXTURE_REPEAT, TILE_TEXTURE_REPEAT);
+    return new THREE.MeshStandardMaterial({ map: texture, roughness: 0.6, metalness: 0.05 });
+  }, [texture]);
+  const materials = useMemo(
+    () => [sideMat, sideMat, topMat, sideMat, sideMat, sideMat],
+    [sideMat, topMat],
+  );
+
   return (
-    <mesh receiveShadow position={[0, -0.12, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-      <planeGeometry args={[14, 14]} />
-      {texture ? (
-        <meshStandardMaterial map={texture} roughness={0.6} metalness={0.05} />
-      ) : (
-        <meshStandardMaterial color="#fff0f5" />
-      )}
+    <mesh receiveShadow castShadow position={[0, -0.04, 0]}>
+      <boxGeometry args={[BOARD_SIZE, 0.08, BOARD_SIZE]} />
+      {materials.map((mat, i) => (
+        <primitive key={mat.uuid} object={mat} attach={`material-${i}`} />
+      ))}
     </mesh>
   );
 }
@@ -94,7 +89,6 @@ function TileHighlight({
   enemyRange,
   enemyCapture,
   onClick,
-  theme,
 }: {
   pos: Position;
   selected: boolean;
@@ -103,19 +97,11 @@ function TileHighlight({
   enemyRange: boolean;
   enemyCapture: boolean;
   onClick: (pos: Position) => void;
-  theme?: string;
 }) {
   const world = useMemo(() => posToWorld(pos), [pos]);
-  const isLight = (pos.x + pos.y) % 2 === 0;
-  const { light, dark } = getTileColors(theme);
-  const tileColor = isLight ? light : dark;
 
   return (
     <group position={world} onClick={(e) => { e.stopPropagation(); onClick(pos); }}>
-      <mesh position={[0, TILE_THICKNESS / 2, 0]} receiveShadow castShadow>
-        <boxGeometry args={[TILE_SIZE, TILE_THICKNESS, TILE_SIZE]} />
-        <meshStandardMaterial color={tileColor} roughness={0.5} metalness={0.05} />
-      </mesh>
       {selected && (
         <mesh position={[0, TILE_TOP_Y + 0.005, 0]} rotation={[-Math.PI / 2, 0, 0]}>
           <planeGeometry args={[0.92, 0.92]} />
@@ -177,10 +163,11 @@ function removeWhiteBackground(source: THREE.Texture): THREE.CanvasTexture {
   return tex;
 }
 
-const TOKEN_SIZE = 0.62;
-const TOKEN_THICKNESS = 0.04;
+const CARD_WIDTH = 0.5;
+const CARD_HEIGHT = 0.7;
+const CARD_DEPTH = 0.05;
 const BASE_CENTER_Y = TILE_TOP_Y + 0.03;
-const TOKEN_Y = TILE_TOP_Y + 0.06 + TOKEN_THICKNESS / 2;
+const CARD_Y = TILE_TOP_Y + 0.06 + CARD_HEIGHT / 2;
 
 function Piece3D({
   piece,
@@ -209,6 +196,7 @@ function Piece3D({
   }, [safeSource]);
 
   const groupRef = useRef<THREE.Group>(null);
+  const cardRef = useRef<THREE.Mesh>(null);
   const target = useMemo(() => posToWorld(piece.position), [piece.position]);
 
   const sideColor = piece.side === 'player' ? '#a2d2ff' : '#ff9aa2';
@@ -224,20 +212,28 @@ function Piece3D({
       map: portraitTexture,
       transparent: false,
       alphaTest: 0.1,
+      side: THREE.DoubleSide,
       roughness: 0.4,
       metalness: 0.05,
     });
   }, [portraitTexture]);
   const materials = useMemo(() => {
     if (!portraitMat) return null;
-    return [sideMat, sideMat, portraitMat, sideMat, sideMat, sideMat];
+    return [sideMat, sideMat, sideMat, sideMat, portraitMat, portraitMat];
   }, [sideMat, portraitMat]);
 
-  useFrame((_, delta) => {
+  useFrame((state, delta) => {
     if (!groupRef.current) return;
     groupRef.current.position.lerp(target, Math.min(1, delta * 12));
-    const scale = isSelected ? 1.08 : 1;
+    const scale = isSelected ? 1.1 : 1;
     groupRef.current.scale.lerp(new THREE.Vector3(scale, scale, scale), Math.min(1, delta * 12));
+
+    if (cardRef.current) {
+      const localCam = state.camera.position.clone();
+      groupRef.current.worldToLocal(localCam);
+      localCam.y = CARD_Y;
+      cardRef.current.rotation.y = Math.atan2(localCam.x, localCam.z);
+    }
   });
 
   const handleClick = useCallback(
@@ -263,21 +259,21 @@ function Piece3D({
         <meshBasicMaterial color={sideColor} transparent opacity={0.55} depthWrite={false} />
       </mesh>
       {materials ? (
-        <mesh position={[0, TOKEN_Y, 0]} castShadow receiveShadow>
-          <boxGeometry args={[TOKEN_SIZE, TOKEN_THICKNESS, TOKEN_SIZE]} />
+        <mesh ref={cardRef} position={[0, CARD_Y, 0]} castShadow receiveShadow>
+          <boxGeometry args={[CARD_WIDTH, CARD_HEIGHT, CARD_DEPTH]} />
           {materials.map((mat, i) => (
             <primitive key={mat.uuid} object={mat} attach={`material-${i}`} />
           ))}
         </mesh>
       ) : (
-        <mesh position={[0, TOKEN_Y, 0]} castShadow>
-          <boxGeometry args={[TOKEN_SIZE, TOKEN_THICKNESS, TOKEN_SIZE]} />
+        <mesh ref={cardRef} position={[0, CARD_Y, 0]} castShadow>
+          <boxGeometry args={[CARD_WIDTH, CARD_HEIGHT, CARD_DEPTH]} />
           <meshStandardMaterial color={sideColor} />
         </mesh>
       )}
       {def.isRoyal && (
-        <mesh position={[0, TOKEN_Y + 0.04, 0]} castShadow>
-          <torusGeometry args={[0.36, 0.025, 16, 48]} />
+        <mesh position={[0, CARD_Y + CARD_HEIGHT / 2 + 0.03, 0]} castShadow>
+          <torusGeometry args={[0.34, 0.025, 16, 48]} />
           <meshStandardMaterial color="#ffffff" emissive="#ffffff" emissiveIntensity={0.3} />
         </mesh>
       )}
@@ -357,7 +353,6 @@ function Scene({
             enemyRange={Boolean(move && !move.capture && isEnemySelected)}
             enemyCapture={Boolean(move?.capture && isEnemySelected)}
             onClick={handleTileClick}
-            theme={theme}
           />
         );
       })}
