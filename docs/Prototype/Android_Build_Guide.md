@@ -1,79 +1,64 @@
-# Android Build Guide - Kawaii Ouroboros (Updated)
+# Android Build Guide - Kawaii Chess (Capacitor)
 
 ## Prerequisites
-- Unity 2022.3 LTS or Unity 6
-- Android Build Support installed via Unity Hub
-- Android device connected with USB Debugging enabled
 
-## Quick Automated Setup (Recommended)
+- Node.js 22+ (check `.nvmrc` if present)
+- pnpm or npm
+- Android SDK (set `ANDROID_HOME` or install to `/opt/homebrew/share/android-commandlinetools`)
+- Java 17
+- An Android device connected with USB Debugging enabled
 
-The project now includes automation to do most of the scene wiring for you.
+## Quick Start
 
-1. Open the `UnityProject_KawaiiOuroboros` folder in Unity 6.
-2. Run the menu item:  
-   **KawaiiChess → Setup Minimal MainTest Scene (and Wire Systems)**
-3. This will:
-   - Create `Assets/Scenes/MainTest.unity`
-   - Create the `Systems` GameObject with all required components wired
-   - Add the scene to Build Settings
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-You can then immediately build using the new tools (see below).
+2. Build the web client and sync it to the Android project:
+   ```bash
+   npm run build
+   npx cap sync android
+   ```
 
-## Manual Scene Setup (Fallback)
+3. Build and install the APK:
+   ```bash
+   ./build-android.sh         # Build APK only
+   ./build-android.sh run     # Build + install + launch on device
+   ```
 
-If you prefer to do it by hand or the script doesn't cover everything:
+The APK is output to `android/app/build/outputs/apk/debug/app-debug.apk`.
 
-1. Create a new scene called `MainTest`
-2. Create an empty GameObject called `Systems`
-3. Add these components to it:
-   - `Bootstrap`
-   - `Board`
-   - `GameManager`
-   - `TurnSystem`
-   - `InputHandler`
-   - `MoveHighlighter`
-   - `BoardSetup`
-   - `SimpleEnemyAI`
-   - `WinCondition`
+## What the Build Script Does
 
-4. In the Inspector, assign references in `Bootstrap`:
-   - Board → Board
-   - GameManager → GameManager
-   - TurnSystem → TurnSystem
-   - InputHandler → InputHandler
-   - MoveHighlighter → MoveHighlighter
-   - BoardSetup → BoardSetup
-   - enemyAI → SimpleEnemyAI
+`./build-android.sh` performs the following steps:
+1. Runs `npm install`.
+2. Builds the production web client into `dist/client/`.
+3. Syncs the web assets into the Capacitor Android project with `npx cap sync android`.
+4. Compiles the Android APK with Gradle.
 
-5. Create a simple Quad or Sprite as the board background (optional)
+When called with `run`, it additionally:
+- Force-stops any running instance of the app.
+- Clears the app’s storage and cache so the WebView cannot serve stale assets.
+- Installs the new APK.
+- Launches the app.
 
-## Android Player Settings
-- Company Name: YourName
-- Product Name: Kawaii Ouroboros
-- Package Name: com.yourname.kawaiiouroboros
-- Minimum API Level: 24
-- Target API Level: Highest installed
+## Capacitor Configuration
 
-## Build Tools
+- **App ID**: `com.kawaiichess.app`
+- **App Name**: `Kawaii Chess`
+- **Web Directory**: `dist/client`
 
-We now have one-click build support:
+These values live in `capacitor.config.ts`.
 
-### From inside Unity
-- **KawaiiChess → Build Android APK**
-- **KawaiiChess → Build and Run on Android Device**
+## Troubleshooting
 
-### From terminal (at workspace root)
-```bash
-./build-android.sh          # Build APK only
-./build-android.sh run      # Build + push to connected device
-```
+- **Stale assets on reinstall**: use `./build-android.sh run`, which clears app storage before installing.
+- **Docker prompt during dev**: the Cloudflare Vite plugin may try to build containers. If Docker is unavailable, use the production build and serve it statically:
+  ```bash
+  npm run build
+  npx serve dist/client
+  ```
+- **Android SDK not found**: set `ANDROID_HOME` to your SDK root, or place the command-line tools at `/opt/homebrew/share/android-commandlinetools`.
 
-The build script automatically sets the correct package name (`com.courtreinland.kawaiichess`), company name, and Android settings.
-
-## Android Player Settings (still applied automatically)
-- Company Name: CourtReinland
-- Product Name: KawaiiChess
-- Package Name: com.courtreinland.kawaiichess
-- Minimum API Level: 24
-
-**Last Updated**: 2026-05-28
+**Last Updated**: 2026-06-16

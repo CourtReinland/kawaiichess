@@ -10,6 +10,17 @@
 - Clear progression and evolution paths
 - Balanced mix of offensive, defensive, and utility pieces
 
+## Visual Representation
+
+In battle, every piece is shown as a **3D character standee** rather than a flat token:
+- A rounded card frame colored by side and rarity (player = sky blue, enemy = sakura pink, royal = gold).
+- The character mini portrait on the front, with the background removed so only the character is visible.
+- A metallic rim around the base and a colored ground ring for quick identification.
+- Cards billboard toward the active camera, keeping the art readable from any board rotation.
+- Royal pieces carry an extra glowing halo above the card.
+
+This gives each unit the charm of a hand-painted anime cutout while keeping board state clear at a glance.
+
 ---
 
 ## Piece Categories
