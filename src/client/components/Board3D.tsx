@@ -167,6 +167,11 @@ function removeWhiteBackground(source: THREE.Texture): THREE.CanvasTexture {
   return tex;
 }
 
+const CARD_WIDTH = 0.55;
+const CARD_HEIGHT = 0.7;
+const CARD_DEPTH = 0.04;
+const CARD_Y = 0.06 + CARD_HEIGHT / 2;
+
 function Piece3D({
   piece,
   isSelected,
@@ -194,17 +199,45 @@ function Piece3D({
   }, [safeSource]);
 
   const groupRef = useRef<THREE.Group>(null);
+  const cardRef = useRef<THREE.Mesh>(null);
   const target = useMemo(() => posToWorld(piece.position), [piece.position]);
-
-  useFrame((_, delta) => {
-    if (!groupRef.current) return;
-    groupRef.current.position.lerp(target, Math.min(1, delta * 12));
-    const scale = isSelected ? 1.12 : 1;
-    groupRef.current.scale.lerp(new THREE.Vector3(scale, scale, scale), Math.min(1, delta * 12));
-  });
 
   const sideColor = piece.side === 'player' ? '#a2d2ff' : '#ff9aa2';
   const royalColor = piece.side === 'player' ? '#ffd700' : '#ff4d6d';
+
+  const sideMat = useMemo(
+    () => new THREE.MeshStandardMaterial({ color: def.isRoyal ? royalColor : sideColor, roughness: 0.5 }),
+    [def.isRoyal, royalColor, sideColor],
+  );
+  const portraitMat = useMemo(() => {
+    if (!portraitTexture) return null;
+    return new THREE.MeshStandardMaterial({
+      map: portraitTexture,
+      transparent: false,
+      alphaTest: 0.1,
+      side: THREE.DoubleSide,
+      roughness: 0.4,
+      metalness: 0.05,
+    });
+  }, [portraitTexture]);
+  const materials = useMemo(() => {
+    if (!portraitMat) return null;
+    return [sideMat, sideMat, sideMat, sideMat, portraitMat, portraitMat];
+  }, [sideMat, portraitMat]);
+
+  useFrame((state, delta) => {
+    if (!groupRef.current) return;
+    groupRef.current.position.lerp(target, Math.min(1, delta * 12));
+    const scale = isSelected ? 1.1 : 1;
+    groupRef.current.scale.lerp(new THREE.Vector3(scale, scale, scale), Math.min(1, delta * 12));
+
+    if (cardRef.current) {
+      const localCam = state.camera.position.clone();
+      groupRef.current.worldToLocal(localCam);
+      localCam.y = CARD_Y;
+      cardRef.current.rotation.y = Math.atan2(localCam.x, localCam.z);
+    }
+  });
 
   const handleClick = useCallback(
     (e: { stopPropagation: () => void }) => {
@@ -219,12 +252,7 @@ function Piece3D({
   );
 
   return (
-    <group
-      ref={groupRef}
-      position={target}
-      onClick={handleClick}
-      castShadow
-    >
+    <group ref={groupRef} position={target} onClick={handleClick}>
       <mesh position={[0, 0.03, 0]} castShadow receiveShadow>
         <cylinderGeometry args={[0.32, 0.36, 0.06, 32]} />
         <meshStandardMaterial color={def.isRoyal ? royalColor : sideColor} roughness={0.4} metalness={0.15} />
@@ -234,18 +262,24 @@ function Piece3D({
         <meshBasicMaterial color={sideColor} transparent opacity={0.55} depthWrite={false} />
       </mesh>
       {def.isRoyal && (
-        <mesh position={[0, 0.07, 0]}>
+        <mesh position={[0, 0.07, 0]} castShadow>
           <torusGeometry args={[0.34, 0.025, 16, 48]} />
           <meshStandardMaterial color="#ffffff" emissive="#ffffff" emissiveIntensity={0.3} />
         </mesh>
       )}
-      <sprite position={[0, 0.62, 0]} scale={[0.58, 0.58, 1]}>
-        {portraitTexture ? (
-          <spriteMaterial map={portraitTexture} transparent alphaTest={0.05} sizeAttenuation />
-        ) : (
-          <spriteMaterial color={sideColor} sizeAttenuation />
-        )}
-      </sprite>
+      {materials ? (
+        <mesh ref={cardRef} position={[0, CARD_Y, 0]} castShadow receiveShadow>
+          <boxGeometry args={[CARD_WIDTH, CARD_HEIGHT, CARD_DEPTH]} />
+          {materials.map((mat, i) => (
+            <primitive key={mat.uuid} object={mat} attach={`material-${i}`} />
+          ))}
+        </mesh>
+      ) : (
+        <mesh ref={cardRef} position={[0, CARD_Y, 0]} castShadow>
+          <boxGeometry args={[CARD_WIDTH, CARD_HEIGHT, CARD_DEPTH]} />
+          <meshStandardMaterial color={sideColor} />
+        </mesh>
+      )}
       {isSelected && (
         <mesh position={[0, 0.015, 0]} rotation={[-Math.PI / 2, 0, 0]}>
           <ringGeometry args={[0.47, 0.5, 48]} />
@@ -440,7 +474,7 @@ export function Board3D(props: Board3DProps) {
         <Canvas
           shadows
           gl={{ antialias: true, alpha: false, powerPreference: 'default' }}
-          style={{ background: '#fff0f5' }}
+          style={{ background: '#fff0f5', width: '100%', height: '100%', borderRadius: '8px', display: 'block' }}
           camera={{ fov: 45, near: 0.1, far: 100, position: [0, 9, 8] }}
         >
           <color attach="background" args={['#fff0f5']} />
