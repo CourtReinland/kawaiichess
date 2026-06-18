@@ -11,9 +11,9 @@ function createFullMockProcess(overrides: Partial<Process> = {}): Process {
     startTime: new Date(),
     endTime: undefined,
     exitCode: undefined,
-    waitForPort: vi.fn(),
-    kill: vi.fn(),
-    getLogs: vi.fn().mockResolvedValue({ stdout: '', stderr: '' }),
+    waitForPort: vi.fn<() => Promise<void>>(),
+    kill: vi.fn<() => Promise<void>>(),
+    getLogs: vi.fn<() => Promise<{ stdout: string; stderr: string }>>().mockResolvedValue({ stdout: '', stderr: '' }),
     ...overrides,
   } as Process;
 }
@@ -107,7 +107,7 @@ describe('findExistingMoltbotProcess', () => {
 
   it('handles listProcesses errors gracefully', async () => {
     const sandbox = {
-      listProcesses: vi.fn().mockRejectedValue(new Error('Network error')),
+      listProcesses: vi.fn<() => Promise<Process[]>>().mockRejectedValue(new Error('Network error')),
     } as unknown as Sandbox;
 
     const result = await findExistingMoltbotProcess(sandbox);

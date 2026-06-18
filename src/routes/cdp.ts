@@ -1633,6 +1633,7 @@ async function handleEmulation(
         };
 
         // Store timezone for scripts that check it
+        // eslint-disable-next-line no-underscore-dangle
         (globalThis as unknown as Record<string, string>).__timezone = tz;
       }, timezoneId);
 

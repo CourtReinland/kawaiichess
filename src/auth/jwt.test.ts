@@ -3,8 +3,8 @@ import { verifyAccessJWT } from './jwt';
 
 // Mock the jose module
 vi.mock('jose', () => ({
-  createRemoteJWKSet: vi.fn(() => 'mock-jwks'),
-  jwtVerify: vi.fn(),
+  createRemoteJWKSet: vi.fn<() => string>(() => 'mock-jwks'),
+  jwtVerify: vi.fn<() => Promise<unknown>>(),
 }));
 
 describe('verifyAccessJWT', () => {

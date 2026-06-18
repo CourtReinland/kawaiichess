@@ -3,7 +3,7 @@ import react from "@vitejs/plugin-react"
 import { cloudflare } from "@cloudflare/vite-plugin"
 
 export default defineConfig({
-	base: "/_admin/",
+	base: "/",
 	plugins: [
 		react(),
 		cloudflare({
@@ -11,4 +11,8 @@ export default defineConfig({
 			persistState: false,
 		}),
 	],
+	build: {
+		outDir: "dist",
+		emptyOutDir: true,
+	},
 })

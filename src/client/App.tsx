@@ -1,16 +1,11 @@
-import AdminPage from './pages/AdminPage';
+import { RunScreen } from './components/RunScreen';
 import './App.css';
+import './components/Game.css';
 
 export default function App() {
   return (
     <div className="app">
-      <header className="app-header">
-        <img src="/logo-small.png" alt="Moltworker" className="header-logo" />
-        <h1>Moltbot Admin</h1>
-      </header>
-      <main className="app-main">
-        <AdminPage />
-      </main>
+      <RunScreen />
     </div>
   );
 }

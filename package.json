@@ -1,9 +1,9 @@
 {
   "name": "kawaiichess",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "private": true,
-  "description": "KawaiiChess - Cute chess experience with AI agent backend on Cloudflare + Unity Android client",
+  "description": "KawaiiChess - Cute anime chess roguelike for web and Android",
   "scripts": {
     "build": "npx vite build",
     "deploy": "npm run build && wrangler deploy",
@@ -17,16 +17,28 @@
     "format:check": "oxfmt --check src/",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "generate:assets": "npx tsx scripts/generate-assets.mjs",
+    "generate:capture-videos": "npx tsx scripts/generate-capture-videos.mjs",
+    "android:build": "npm run build && npx cap sync android && cd android && ./gradlew assembleDebug",
+    "android:run": "npm run android:build && adb install -r android/app/build/outputs/apk/debug/app-debug.apk && adb shell am start -n com.kawaiichess.app/.MainActivity"
   },
   "dependencies": {
+    "@capacitor/core": "^6.0.0",
     "@cloudflare/puppeteer": "^1.0.5",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
+    "@types/three": "^0.184.1",
     "hono": "^4.11.6",
     "jose": "^6.0.0",
+    "puppeteer-core": "^25.1.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "three": "^0.184.0"
   },
   "devDependencies": {
+    "@capacitor/android": "^6.0.0",
+    "@capacitor/cli": "^6.0.0",
     "@cloudflare/sandbox": "*",
     "@cloudflare/vite-plugin": "^1.0.0",
     "@cloudflare/workers-types": "^4.20250109.0",

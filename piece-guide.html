@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kawaii Chess — Piece Guide</title>
+  <style>
+    :root {
+      --bg: #fff0f5;
+      --panel: #ffffff;
+      --primary: #ff69b4;
+      --primary-dark: #d1478c;
+      --accent: #87ceeb;
+      --text: #4a2c3a;
+      --light-text: #8a6a7a;
+      --shadow: 0 4px 12px rgba(74, 44, 58, 0.12);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, var(--bg) 0%, #e6f7ff 100%);
+      color: var(--text);
+      padding: 24px;
+    }
+    header {
+      max-width: 1000px;
+      margin: 0 auto 24px;
+      text-align: center;
+    }
+    h1 {
+      margin: 0;
+      color: var(--primary-dark);
+      font-size: 2rem;
+    }
+    p.subtitle {
+      margin: 8px 0 0;
+      color: var(--light-text);
+    }
+    nav {
+      max-width: 1000px;
+      margin: 0 auto 24px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    nav a {
+      background: var(--panel);
+      color: var(--text);
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 999px;
+      box-shadow: var(--shadow);
+      font-weight: 600;
+    }
+    nav a:hover {
+      background: var(--primary);
+      color: white;
+    }
+    section {
+      max-width: 1000px;
+      margin: 0 auto 32px;
+    }
+    section h2 {
+      color: var(--primary-dark);
+      margin-bottom: 16px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .card {
+      background: var(--panel);
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .icon {
+      font-size: 2.5rem;
+      line-height: 1;
+    }
+    .header h3 {
+      margin: 0;
+      font-size: 1.1rem;
+      color: var(--primary-dark);
+    }
+    .category {
+      font-size: 0.8rem;
+      color: var(--light-text);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .personality {
+      font-style: italic;
+      color: var(--light-text);
+      margin: 0 0 12px;
+    }
+    .movement, .ability {
+      font-size: 0.9rem;
+      margin: 8px 0 0;
+    }
+    .quote {
+      font-weight: 600;
+      color: var(--primary-dark);
+      margin: 8px 0;
+    }
+    .ability strong {
+      color: var(--primary-dark);
+    }
+    .ability p {
+      margin: 4px 0 0;
+    }
+    .tag {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--text);
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    footer {
+      text-align: center;
+      color: var(--light-text);
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🎀 Kawaii Chess Academy Roster</h1>
+    <p class="subtitle">Every club member, ability, personality, and icon in one place.</p>
+  </header>
+  <nav>
+    <a href="#tier-1">Tier 1 — Common</a>
+    <a href="#tier-2">Tier 2 — Specialized</a>
+    <a href="#tier-3">Tier 3 — Legendary</a>
+  </nav>
+  <main>
+    
+    <section id="tier-1">
+      <h2>Tier 1 — Common</h2>
+      <div class="grid">
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🏰</span>
+              <div>
+                <h3>Magical Girl Rook</h3>
+                <span class="category">defensive</span>
+              </div>
+            </div>
+            <p class="personality">Stoic student-council vice president who defends the club room with dramatic barrier magic.</p>
+            
+            <p class="movement"><strong>Moves:</strong> rook</p>
+            
+    <div class="ability">
+      <strong>Barrier</strong> <span class="tag">active</span> (2 uses) Range 1
+      <p>Give an adjacent ally a protective barrier.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🥷</span>
+              <div>
+                <h3>Ninja Knight</h3>
+                <span class="category">trickster</span>
+              </div>
+            </div>
+            <p class="personality">Silent transfer student who appears in a puff of smoke and vanishes before roll call.</p>
+            
+            <p class="movement"><strong>Moves:</strong> knight</p>
+            
+    <div class="ability">
+      <strong>Shadow Step</strong> <span class="tag">active</span> (2 uses) 
+      <p>Move like a knight again in the same turn.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🎤</span>
+              <div>
+                <h3>Idol Bishop</h3>
+                <span class="category">support</span>
+              </div>
+            </div>
+            <p class="personality">Cheerful campus idol whose chants buff allies and draw crowds at culture festivals.</p>
+            
+            <p class="movement"><strong>Moves:</strong> bishop</p>
+            
+    <div class="ability">
+      <strong>Fan Service</strong> <span class="tag">active</span> (2 uses) Range 1
+      <p>Buff an adjacent ally with +1 range this turn.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🐉</span>
+              <div>
+                <h3>Dragon Princess</h3>
+                <span class="category">offensive</span>
+              </div>
+            </div>
+            <p class="personality">Proud royal who joined the club to prove she can rise from kōhai to queen.</p>
+            
+            <p class="movement"><strong>Moves:</strong> dragon • ROYAL</p>
+            
+    <div class="ability">
+      <strong>Promote</strong> <span class="tag">passive</span>  
+      <p>Promote to Dragon Queen upon reaching the far rank.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">⛩️</span>
+              <div>
+                <h3>Shrine Maiden</h3>
+                <span class="category">support</span>
+              </div>
+            </div>
+            <p class="personality">Gentle purifier who cleanses curses, offers tea, and never misses morning practice.</p>
+            
+            <p class="movement"><strong>Moves:</strong> bishop</p>
+            
+    <div class="ability">
+      <strong>Purify</strong> <span class="tag">active</span> (2 uses) Range 1
+      <p>Remove debuffs from an adjacent ally.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🎒</span>
+              <div>
+                <h3>Schoolgirl Pawn</h3>
+                <span class="category">utility</span>
+              </div>
+            </div>
+            <p class="personality">Eager first-year who studies openings every night and dreams of promotion.</p>
+            
+            <p class="movement"><strong>Moves:</strong> pawn • promotes to queen</p>
+            <em>No active ability.</em>
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🧹</span>
+              <div>
+                <h3>Maid Knight</h3>
+                <span class="category">utility</span>
+              </div>
+            </div>
+            <p class="personality">Polished and precise; tidies the board while sweeping enemies aside.</p>
+            
+            <p class="movement"><strong>Moves:</strong> knight</p>
+            
+    <div class="ability">
+      <strong>Clean Sweep</strong> <span class="tag">active</span> (2 uses) Range 1
+      <p>Remove hazards or debuffs from an adjacent square.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🎾</span>
+              <div>
+                <h3>Tennis Bishop</h3>
+                <span class="category">control</span>
+              </div>
+            </div>
+            <p class="personality">Energetic sports-club ace who volleys pieces around with a wicked backhand.</p>
+            
+            <p class="movement"><strong>Moves:</strong> bishop</p>
+            
+    <div class="ability">
+      <strong>Backhand</strong> <span class="tag">active</span> (2 uses) Range 1
+      <p>Push an adjacent enemy one square away.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">📚</span>
+              <div>
+                <h3>Bookworm Rook</h3>
+                <span class="category">offensive</span>
+              </div>
+            </div>
+            <p class="personality">Quiet strategist who takes notes and gets stronger with every capture.</p>
+            
+            <p class="movement"><strong>Moves:</strong> rook</p>
+            
+    <div class="ability">
+      <strong>Study</strong> <span class="tag">passive</span>  
+      <p>+1 movement range after making a capture.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🐱</span>
+              <div>
+                <h3>Catgirl Pawn</h3>
+                <span class="category">utility</span>
+              </div>
+            </div>
+            <p class="personality">Playful and unpredictable; pounces forward then naps on the clock.</p>
+            
+            <p class="movement"><strong>Moves:</strong> pawn • promotes to knight</p>
+            <em>No active ability.</em>
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">📣</span>
+              <div>
+                <h3>Cheerleader</h3>
+                <span class="category">support</span>
+              </div>
+            </div>
+            <p class="personality">Loud, peppy, and convinced shouting helps allies hit harder.</p>
+            
+            <p class="movement"><strong>Moves:</strong> king</p>
+            
+    <div class="ability">
+      <strong>Cheer</strong> <span class="tag">active</span> (2 uses) Range 1
+      <p>Give an adjacent ally +1 capture damage this turn.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🎹</span>
+              <div>
+                <h3>Piano Bishop</h3>
+                <span class="category">control</span>
+              </div>
+            </div>
+            <p class="personality">Dramatic composer whose melodies stun foes mid-step.</p>
+            
+            <p class="movement"><strong>Moves:</strong> bishop</p>
+            
+    <div class="ability">
+      <strong>Stun Line</strong> <span class="tag">active</span> (1 use) 
+      <p>Stun an enemy along a bishop line.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🤓</span>
+              <div>
+                <h3>Library Assistant</h3>
+                <span class="category">trickster</span>
+              </div>
+            </div>
+            <p class="personality">Shy but clever; swaps places when nobody is looking.</p>
+            
+            <p class="movement"><strong>Moves:</strong> bishop</p>
+            
+    <div class="ability">
+      <strong>Swap</strong> <span class="tag">active</span> (2 uses) Range 1
+      <p>Swap positions with an adjacent piece.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🏃</span>
+              <div>
+                <h3>Track Star</h3>
+                <span class="category">offensive</span>
+              </div>
+            </div>
+            <p class="personality">Always sprinting; out of breath but out of reach.</p>
+            
+            <p class="movement"><strong>Moves:</strong> short-rook • range 3</p>
+            
+    <div class="ability">
+      <strong>Sprint</strong> <span class="tag">active</span> (1 use) 
+      <p>Move twice in one turn, once per battle.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🥐</span>
+              <div>
+                <h3>Baker</h3>
+                <span class="category">support</span>
+              </div>
+            </div>
+            <p class="personality">Warm-hearted healer armed with fresh bread and hugs.</p>
+            
+            <p class="movement"><strong>Moves:</strong> king</p>
+            
+    <div class="ability">
+      <strong>Fresh Loaf</strong> <span class="tag">active</span> (2 uses) Range 1
+      <p>Heal an adjacent ally.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🤴</span>
+              <div>
+                <h3>King</h3>
+                <span class="category">defensive</span>
+              </div>
+            </div>
+            <p class="personality">Nervous club president; the whole match ends if he falls.</p>
+            
+            <p class="movement"><strong>Moves:</strong> king • ROYAL</p>
+            <em>No active ability.</em>
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🏰</span>
+              <div>
+                <h3>Rook</h3>
+                <span class="category">offensive</span>
+              </div>
+            </div>
+            <p class="personality">Steadfast castle-club member who dominates straight lines.</p>
+            
+            <p class="movement"><strong>Moves:</strong> rook</p>
+            <em>No active ability.</em>
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🧙</span>
+              <div>
+                <h3>Bishop</h3>
+                <span class="category">support</span>
+              </div>
+            </div>
+            <p class="personality">Wise strategy-club veteran who strikes from afar on diagonals.</p>
+            
+            <p class="movement"><strong>Moves:</strong> bishop</p>
+            <em>No active ability.</em>
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🦄</span>
+              <div>
+                <h3>Knight</h3>
+                <span class="category">trickster</span>
+              </div>
+            </div>
+            <p class="personality">Gallant charger who leaps over obstacles and asks questions later.</p>
+            
+            <p class="movement"><strong>Moves:</strong> knight</p>
+            <em>No active ability.</em>
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🧒</span>
+              <div>
+                <h3>Pawn</h3>
+                <span class="category">utility</span>
+              </div>
+            </div>
+            <p class="personality">Humble first-year who dreams of promotion.</p>
+            
+            <p class="movement"><strong>Moves:</strong> pawn • promotes to queen</p>
+            <em>No active ability.</em>
+          </article>
+        
+      </div>
+    </section>
+  
+    <section id="tier-2">
+      <h2>Tier 2 — Specialized</h2>
+      <div class="grid">
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🌸</span>
+              <div>
+                <h3>Sakura Assassin</h3>
+                <span class="category">offensive</span>
+              </div>
+            </div>
+            <p class="personality">Elegant third-year who dances from target to target under falling petals.</p>
+            
+            <p class="movement"><strong>Moves:</strong> knight • jumps pieces</p>
+            
+    <div class="ability">
+      <strong>Chain Strike</strong> <span class="tag">active</span> (1 use) 
+      <p>Chain up to 3 knight jumps if each captures an enemy.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🔮</span>
+              <div>
+                <h3>Celestial Mage</h3>
+                <span class="category">support</span>
+              </div>
+            </div>
+            <p class="personality">Mysterious stargazer who bends space for a better angle.</p>
+            
+            <p class="movement"><strong>Moves:</strong> bishop</p>
+            
+    <div class="ability">
+      <strong>Teleport</strong> <span class="tag">active</span> (2 uses) Range 3
+      <p>Teleport to any empty square in range 3.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🛡️</span>
+              <div>
+                <h3>Valkyrie Paladin</h3>
+                <span class="category">defensive</span>
+              </div>
+            </div>
+            <p class="personality">Noble guardian who shields allies with radiant wings.</p>
+            
+            <p class="movement"><strong>Moves:</strong> rook</p>
+            
+    <div class="ability">
+      <strong>Shield Aura</strong> <span class="tag">passive</span>  Range 1
+      <p>Adjacent allies gain a barrier.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🦊</span>
+              <div>
+                <h3>Kitsune Trickster</h3>
+                <span class="category">trickster</span>
+              </div>
+            </div>
+            <p class="personality">Mischievous fox spirit who swaps places just for fun.</p>
+            
+            <p class="movement"><strong>Moves:</strong> jump-king • range 2</p>
+            
+    <div class="ability">
+      <strong>Illusion Swap</strong> <span class="tag">active</span> (2 uses) Range 2
+      <p>Swap positions with any piece in range 2.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">⚔️</span>
+              <div>
+                <h3>Thunder Samurai</h3>
+                <span class="category">offensive</span>
+              </div>
+            </div>
+            <p class="personality">Honor-bound warrior who dashes through lines in a flash.</p>
+            
+            <p class="movement"><strong>Moves:</strong> rook</p>
+            
+    <div class="ability">
+      <strong>Thunder Dash</strong> <span class="tag">active</span> (1 use) 
+      <p>Dash through a rook line, capturing all enemies in the path.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🍬</span>
+              <div>
+                <h3>Candy Witch</h3>
+                <span class="category">control</span>
+              </div>
+            </div>
+            <p class="personality">Sweet-toothed sorceress who leaves sticky traps everywhere.</p>
+            
+            <p class="movement"><strong>Moves:</strong> bishop</p>
+            
+    <div class="ability">
+      <strong>Candy Trap</strong> <span class="tag">on-capture</span>  
+      <p>Slow an enemy on hit, reducing its movement next turn.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🤖</span>
+              <div>
+                <h3>Mecha Knight</h3>
+                <span class="category">offensive</span>
+              </div>
+            </div>
+            <p class="personality">Clunky robot-club pilot who yells </p>
+            
+            <p class="movement"><strong>Moves:</strong> knight</p>
+            
+    <div class="ability">
+      <strong>Self-Destruct</strong> <span class="tag">active</span> (1 use) Range 1
+      <p>Explode, dealing damage to adjacent enemies.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🏹</span>
+              <div>
+                <h3>Forest Archer</h3>
+                <span class="category">offensive</span>
+              </div>
+            </div>
+            <p class="personality">Calm ranger who never misses a diagonal shot.</p>
+            
+            <p class="movement"><strong>Moves:</strong> bishop-range • range 4</p>
+            
+    <div class="ability">
+      <strong>Volley</strong> <span class="tag">active</span> (2 uses) 
+      <p>Shoot over pieces in a bishop direction.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🎭</span>
+              <div>
+                <h3>Phantom Thief</h3>
+                <span class="category">trickster</span>
+              </div>
+            </div>
+            <p class="personality">Dashing rogue who steals gold and hearts.</p>
+            
+            <p class="movement"><strong>Moves:</strong> knight</p>
+            
+    <div class="ability">
+      <strong>Steal</strong> <span class="tag">on-capture</span>  
+      <p>Gain extra gold when capturing.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">♨️</span>
+              <div>
+                <h3>Onsen Healer</h3>
+                <span class="category">support</span>
+              </div>
+            </div>
+            <p class="personality">Relaxed spa-club attendant who heals allies with hot-spring steam.</p>
+            
+            <p class="movement"><strong>Moves:</strong> king</p>
+            
+    <div class="ability">
+      <strong>Soothing Waters</strong> <span class="tag">passive</span>  Range 1
+      <p>Heal adjacent allies at the start of your turn.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🏂</span>
+              <div>
+                <h3>Snowboarder</h3>
+                <span class="category">control</span>
+              </div>
+            </div>
+            <p class="personality">Chill thrill-seeker who shoves enemies downhill.</p>
+            
+            <p class="movement"><strong>Moves:</strong> rook</p>
+            
+    <div class="ability">
+      <strong>Shove</strong> <span class="tag">active</span> (2 uses) 
+      <p>Slide into an enemy and knock it back one square.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">👩‍🍳</span>
+              <div>
+                <h3>Magical Chef</h3>
+                <span class="category">support</span>
+              </div>
+            </div>
+            <p class="personality">Passionate cook who serves power meals with a wink.</p>
+            
+            <p class="movement"><strong>Moves:</strong> bishop</p>
+            
+    <div class="ability">
+      <strong>Power Meal</strong> <span class="tag">active</span> (2 uses) Range 1
+      <p>Grant an adjacent ally a temporary stat boost.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🕵️</span>
+              <div>
+                <h3>Spy Master</h3>
+                <span class="category">utility</span>
+              </div>
+            </div>
+            <p class="personality">Cool operative who reveals enemy plans with a single glance.</p>
+            
+            <p class="movement"><strong>Moves:</strong> king-plus-one</p>
+            
+    <div class="ability">
+      <strong>Reveal</strong> <span class="tag">active</span> (1 use) 
+      <p>Reveal all enemy abilities.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🐰</span>
+              <div>
+                <h3>Bunny Girl</h3>
+                <span class="category">offensive</span>
+              </div>
+            </div>
+            <p class="personality">Bouncy brawler who hops from one fight to the next.</p>
+            
+            <p class="movement"><strong>Moves:</strong> knight</p>
+            
+    <div class="ability">
+      <strong>Extra Hop</strong> <span class="tag">on-capture</span>  
+      <p>Gain an extra knight move after a capture.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🌻</span>
+              <div>
+                <h3>Gardener</h3>
+                <span class="category">support</span>
+              </div>
+            </div>
+            <p class="personality">Patient cultivator who grows healing flowers on the front line.</p>
+            
+            <p class="movement"><strong>Moves:</strong> bishop</p>
+            
+    <div class="ability">
+      <strong>Healing Flower</strong> <span class="tag">active</span> (2 uses) Range 1
+      <p>Place a healing flower on an adjacent square.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">☠️</span>
+              <div>
+                <h3>Pirate Captain</h3>
+                <span class="category">offensive</span>
+              </div>
+            </div>
+            <p class="personality">Swaggering captain who sails straight toward the enemy king.</p>
+            
+            <p class="movement"><strong>Moves:</strong> rook</p>
+            
+    <div class="ability">
+      <strong>Boarding Party</strong> <span class="tag">active</span> (1 use) 
+      <p>Move adjacent to the enemy King once per battle.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🔬</span>
+              <div>
+                <h3>Scientist</h3>
+                <span class="category">control</span>
+              </div>
+            </div>
+            <p class="personality">Curious researcher who marks targets for bigger experiments.</p>
+            
+            <p class="movement"><strong>Moves:</strong> bishop</p>
+            
+    <div class="ability">
+      <strong>Mark Target</strong> <span class="tag">active</span> (2 uses) Range 3
+      <p>Mark an enemy to take extra damage next hit.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">💃</span>
+              <div>
+                <h3>Fashion Model</h3>
+                <span class="category">control</span>
+              </div>
+            </div>
+            <p class="personality">Stunning diva whose dazzle stops enemies in their tracks.</p>
+            
+            <p class="movement"><strong>Moves:</strong> king</p>
+            
+    <div class="ability">
+      <strong>Dazzle</strong> <span class="tag">active</span> (1 use) Range 2
+      <p>Nearby enemies skip their next turn.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🥋</span>
+              <div>
+                <h3>Karate Girl</h3>
+                <span class="category">offensive</span>
+              </div>
+            </div>
+            <p class="personality">Disciplined fighter focused on powerful, focused strikes.</p>
+            
+            <p class="movement"><strong>Moves:</strong> short-rook • range 2</p>
+            
+    <div class="ability">
+      <strong>Focused Strike</strong> <span class="tag">active</span> (2 uses) 
+      <p>Powerful forward strike that also pushes.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🧜</span>
+              <div>
+                <h3>Mermaid</h3>
+                <span class="category">utility</span>
+              </div>
+            </div>
+            <p class="personality">Serene songstress who flows across the board like water.</p>
+            
+            <p class="movement"><strong>Moves:</strong> bishop</p>
+            
+    <div class="ability">
+      <strong>Flow</strong> <span class="tag">passive</span>  
+      <p>Move through water tiles freely.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">👻</span>
+              <div>
+                <h3>Ghost Girl</h3>
+                <span class="category">trickster</span>
+              </div>
+            </div>
+            <p class="personality">Timid spirit who phases through enemies with a shy </p>
+            
+            <p class="movement"><strong>Moves:</strong> king</p>
+            
+    <div class="ability">
+      <strong>Phase</strong> <span class="tag">active</span> (1 use) 
+      <p>Phase through one enemy per turn.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">⚗️</span>
+              <div>
+                <h3>Alchemist</h3>
+                <span class="category">utility</span>
+              </div>
+            </div>
+            <p class="personality">Eccentric inventor who turns allies into surprises.</p>
+            
+            <p class="movement"><strong>Moves:</strong> bishop</p>
+            
+    <div class="ability">
+      <strong>Transmute</strong> <span class="tag">active</span> (1 use) Range 1
+      <p>Temporarily transform an adjacent ally into another piece.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🏎️</span>
+              <div>
+                <h3>Racer</h3>
+                <span class="category">offensive</span>
+              </div>
+            </div>
+            <p class="personality">Adrenaline junkie who overdrives across straightaways.</p>
+            
+            <p class="movement"><strong>Moves:</strong> rook</p>
+            
+    <div class="ability">
+      <strong>Overdrive</strong> <span class="tag">active</span> (1 use) 
+      <p>Move extra far in straight lines this turn.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">⛩️</span>
+              <div>
+                <h3>Shrine Guardian</h3>
+                <span class="category">defensive</span>
+              </div>
+            </div>
+            <p class="personality">Silent protector who reflects harm back at attackers.</p>
+            
+            <p class="movement"><strong>Moves:</strong> rook</p>
+            
+    <div class="ability">
+      <strong>Reflect</strong> <span class="tag">passive</span> (1 use) 
+      <p>Reflect one attack per battle.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🎤</span>
+              <div>
+                <h3>Pop Star</h3>
+                <span class="category">control</span>
+              </div>
+            </div>
+            <p class="personality">Charismatic idol whose charm makes enemies skip their turn.</p>
+            
+            <p class="movement"><strong>Moves:</strong> bishop</p>
+            
+    <div class="ability">
+      <strong>Charm</strong> <span class="tag">active</span> (1 use) Range 2
+      <p>Area charm causing enemies in range 2 to skip a turn.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">👸</span>
+              <div>
+                <h3>Queen</h3>
+                <span class="category">offensive</span>
+              </div>
+            </div>
+            <p class="personality">Regal ace who commands the board with effortless grace.</p>
+            
+            <p class="movement"><strong>Moves:</strong> queen</p>
+            <em>No active ability.</em>
+          </article>
+        
+      </div>
+    </section>
+  
+    <section id="tier-3">
+      <h2>Tier 3 — Rare & Legendary</h2>
+      <div class="grid">
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">👑</span>
+              <div>
+                <h3>Eternal Queen</h3>
+                <span class="category">support</span>
+              </div>
+            </div>
+            <p class="personality">Timeless student-council president who can rewind fate itself once per run.</p>
+            
+            <p class="movement"><strong>Moves:</strong> queen</p>
+            
+    <div class="ability">
+      <strong>Time Rewind</strong> <span class="tag">active</span> (1 use) 
+      <p>Rewind to the start of the current battle once per run.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">💀</span>
+              <div>
+                <h3>Moonlight Reaper</h3>
+                <span class="category">offensive</span>
+              </div>
+            </div>
+            <p class="personality">Grim harvester who grows stronger as allies fall.</p>
+            
+            <p class="movement"><strong>Moves:</strong> extended-knight</p>
+            
+    <div class="ability">
+      <strong>Reap</strong> <span class="tag">passive</span>  
+      <p>Long-range capture; grows stronger when allies fall.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🌻</span>
+              <div>
+                <h3>Sunflower Paladin</h3>
+                <span class="category">defensive</span>
+              </div>
+            </div>
+            <p class="personality">Radiant knight whose sunny aura mends nearby friends.</p>
+            
+            <p class="movement"><strong>Moves:</strong> rook</p>
+            
+    <div class="ability">
+      <strong>Sun Aura</strong> <span class="tag">passive</span>  Range 1
+      <p>Constant healing aura for adjacent allies.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🌑</span>
+              <div>
+                <h3>Void Princess</h3>
+                <span class="category">control</span>
+              </div>
+            </div>
+            <p class="personality">Aloof royalty who banishes enemies into the void.</p>
+            
+            <p class="movement"><strong>Moves:</strong> short-queen • range 4</p>
+            
+    <div class="ability">
+      <strong>Banish</strong> <span class="tag">active</span> (1 use) Range 3
+      <p>Remove an enemy from the board once per battle.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🔮</span>
+              <div>
+                <h3>Crystal Oracle</h3>
+                <span class="category">utility</span>
+              </div>
+            </div>
+            <p class="personality">Seer who peers into future enemy maneuvers.</p>
+            
+            <p class="movement"><strong>Moves:</strong> bishop</p>
+            
+    <div class="ability">
+      <strong>Foresee</strong> <span class="tag">active</span> (2 uses) 
+      <p>Reveal the next enemy moves.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">👹</span>
+              <div>
+                <h3>Blazing Oni</h3>
+                <span class="category">offensive</span>
+              </div>
+            </div>
+            <p class="personality">Furious demon who charges through everything in a straight line.</p>
+            
+            <p class="movement"><strong>Moves:</strong> rook</p>
+            
+    <div class="ability">
+      <strong>Line Charge</strong> <span class="tag">active</span> (1 use) 
+      <p>Charge in a straight line, capturing everything in the path.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🌟</span>
+              <div>
+                <h3>Starlight Idol</h3>
+                <span class="category">support</span>
+              </div>
+            </div>
+            <p class="personality">Cosmic performer whose encore buffs the whole team.</p>
+            
+            <p class="movement"><strong>Moves:</strong> bishop</p>
+            
+    <div class="ability">
+      <strong>Encore</strong> <span class="tag">on-capture</span>  
+      <p>Team-wide buff on capture.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🧟</span>
+              <div>
+                <h3>Necromancer-chan</h3>
+                <span class="category">support</span>
+              </div>
+            </div>
+            <p class="personality">Cute necromancer who befriends fallen enemies.</p>
+            
+            <p class="movement"><strong>Moves:</strong> bishop</p>
+            
+    <div class="ability">
+      <strong>Raise</strong> <span class="tag">active</span> (1 use) Range 2
+      <p>Raise fallen enemies as allies.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">😇</span>
+              <div>
+                <h3>Guardian Angel</h3>
+                <span class="category">defensive</span>
+              </div>
+            </div>
+            <p class="personality">Devoted protector who takes a fatal blow for the king.</p>
+            
+            <p class="movement"><strong>Moves:</strong> king</p>
+            
+    <div class="ability">
+      <strong>Interception</strong> <span class="tag">passive</span> (1 use) 
+      <p>Intercept a lethal attack on your King once per run.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">👿</span>
+              <div>
+                <h3>Demon Queen</h3>
+                <span class="category">offensive</span>
+              </div>
+            </div>
+            <p class="personality">Volatile tyrant who trades safety for overwhelming power.</p>
+            
+            <p class="movement"><strong>Moves:</strong> queen</p>
+            
+    <div class="ability">
+      <strong>Blood Rush</strong> <span class="tag">active</span> (1 use) 
+      <p>Sacrifice HP for massive movement.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">⏳</span>
+              <div>
+                <h3>Time Traveler</h3>
+                <span class="category">trickster</span>
+              </div>
+            </div>
+            <p class="personality">Whimsy wanderer who rewinds to a safer moment.</p>
+            
+            <p class="movement"><strong>Moves:</strong> king</p>
+            
+    <div class="ability">
+      <strong>Rewind Position</strong> <span class="tag">active</span> (1 use) 
+      <p>Return to a previous position once per run.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🌌</span>
+              <div>
+                <h3>Cosmic Dragon</h3>
+                <span class="category">offensive</span>
+              </div>
+            </div>
+            <p class="personality">Ancient star wyrm who breathes diagonal starfire.</p>
+            
+            <p class="movement"><strong>Moves:</strong> dragon</p>
+            
+    <div class="ability">
+      <strong>Star Fire</strong> <span class="tag">active</span> (1 use) 
+      <p>Cone attack in a diagonal direction.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🛡️</span>
+              <div>
+                <h3>Holy Knight</h3>
+                <span class="category">support</span>
+              </div>
+            </div>
+            <p class="personality">Virtuous champion who can resurrect one fallen ally.</p>
+            
+            <p class="movement"><strong>Moves:</strong> rook</p>
+            
+    <div class="ability">
+      <strong>Revive</strong> <span class="tag">active</span> (1 use) 
+      <p>Revive one fallen ally once per run.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">🌒</span>
+              <div>
+                <h3>Eclipse Sorceress</h3>
+                <span class="category">control</span>
+              </div>
+            </div>
+            <p class="personality">Moody mage who shifts the very board between day and night.</p>
+            
+            <p class="movement"><strong>Moves:</strong> bishop</p>
+            
+    <div class="ability">
+      <strong>Eclipse</strong> <span class="tag">active</span> (1 use) 
+      <p>Switch day/night, affecting all piece movement.</p>
+    </div>
+  
+          </article>
+        
+          <article class="card">
+            <div class="header">
+              <span class="icon">👾</span>
+              <div>
+                <h3>Final Boss Queen</h3>
+                <span class="category">offensive</span>
+              </div>
+            </div>
+            <p class="personality">The reigning champion captain: dramatic, powerful, and loves monologues.</p>
+            
+            <p class="movement"><strong>Moves:</strong> queen • ROYAL</p>
+            
+    <div class="ability">
+      <strong>Boss Rush</strong> <span class="tag">active</span> (3 uses) 
+      <p>Multiple powerful abilities for boss battles only.</p>
+    </div>
+  
+          </article>
+        
+      </div>
+    </section>
+  
+  </main>
+  <footer>
+    <p>61 pieces total • generated from src/game/pieces.ts</p>
+  </footer>
+</body>
+</html>

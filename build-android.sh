@@ -1,42 +1,88 @@
 #!/bin/zsh
-# Convenience wrapper for building KawaiiChess for Android
+# Build KawaiiChess Android APK from the web-based client using Capacitor.
 # Usage:
 #   ./build-android.sh          # Build APK only
-#   ./build-android.sh run      # Build + attempt AutoRun on connected device
+#   ./build-android.sh run      # Build + install + launch on connected device
 
 set -e
 
-UNITY="/Applications/Unity/Hub/Editor/6000.3.10f1/Unity.app/Contents/MacOS/Unity"
-PROJECT="UnityProject_KawaiiOuroboros"
+PROJECT_DIR="$(cd "$(dirname "$0")" && pwd)"
+APK_DIR="$PROJECT_DIR/android/app/build/outputs/apk/debug"
+APK_NAME="app-debug.apk"
+APK_PATH="$APK_DIR/$APK_NAME"
 LOG="/tmp/kawaiichess-android-build.log"
 
-METHOD="BuildKawaiiChess.BuildAndroidAPK"
-
+RUN_MODE=false
 if [[ "$1" == "run" ]]; then
-    METHOD="BuildKawaiiChess.BuildAndRunAndroid"
-    echo "→ Build + AutoRun mode"
+  RUN_MODE=true
+  echo "→ Build + install + launch mode"
 fi
 
-echo "=== KawaiiChess Android Build ==="
-echo "Unity: $UNITY"
-echo "Project: $PROJECT"
-echo "Method: $METHOD"
+echo "=== KawaiiChess Android Build (Web → Capacitor) ==="
+echo "Project: $PROJECT_DIR"
 echo "Log: $LOG"
 echo ""
 
-"$UNITY" \
-  -batchmode \
-  -quit \
-  -projectPath "$PROJECT" \
-  -executeMethod "$METHOD" \
-  -logFile "$LOG" \
-  2>&1 | tail -20 || true
+# Validate Android SDK.
+if [[ -z "$ANDROID_HOME" && -z "$ANDROID_SDK_ROOT" ]]; then
+  if [[ -d "/opt/homebrew/share/android-commandlinetools" ]]; then
+    export ANDROID_HOME="/opt/homebrew/share/android-commandlinetools"
+    export ANDROID_SDK_ROOT="$ANDROID_HOME"
+  else
+    echo "Error: ANDROID_HOME or ANDROID_SDK_ROOT is not set."
+    echo "Install the Android SDK or set ANDROID_HOME before building."
+    exit 1
+  fi
+fi
+
+# Validate Node tooling.
+if ! command -v npm >/dev/null 2>&1; then
+  echo "Error: npm is not installed."
+  exit 1
+fi
+
+cd "$PROJECT_DIR"
+
+# Ensure dependencies are installed.
+echo "→ Installing dependencies..."
+npm install >> "$LOG" 2>&1
+
+# Build the web client.
+echo "→ Building web client..."
+npm run build >> "$LOG" 2>&1
+
+# Sync Capacitor with the native project.
+echo "→ Syncing Capacitor Android project..."
+npx cap sync android >> "$LOG" 2>&1
+
+# Build the Android APK.
+echo "→ Building Android APK..."
+cd android
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  ./gradlew assembleDebug >> "$LOG" 2>&1
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+  ./gradlew assembleDebug >> "$LOG" 2>&1
+else
+  gradlew assembleDebug >> "$LOG" 2>&1
+fi
+
+cd "$PROJECT_DIR"
+
+if [[ ! -f "$APK_PATH" ]]; then
+  echo "Error: APK not found at $APK_PATH"
+  echo "Check the build log: $LOG"
+  exit 1
+fi
 
 echo ""
-echo "=== Build finished. Check log for details: $LOG ==="
-echo "If you got a licensing error, open the project in the normal Unity Editor GUI"
-echo "and use the menu: KawaiiChess → Build Android APK (or Build and Run on Android Device)."
+echo "=== Build finished ==="
+echo "APK: $APK_PATH"
 echo ""
-echo "After a successful build, the APK will be in: $PROJECT/Builds/KawaiiChess.apk"
-echo "You can then install manually with:"
-echo "  adb install -r $PROJECT/Builds/KawaiiChess.apk"
+
+if [[ "$RUN_MODE" == true ]]; then
+  echo "→ Installing APK on connected device..."
+  adb install -r "$APK_PATH"
+
+  echo "→ Launching Kawaii Chess..."
+  adb shell am start -n com.kawaiichess.app/.MainActivity
+fi

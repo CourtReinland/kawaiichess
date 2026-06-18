@@ -56,6 +56,7 @@ describe('isE2ETestMode', () => {
 
 describe('extractJWT', () => {
   // Helper to create a mock context
+  // eslint-disable-next-line unicorn/consistent-function-scoping
   function createMockContext(options: { jwtHeader?: string; cookies?: string }): Context<AppEnv> {
     const headers = new Headers();
     if (options.jwtHeader) {
@@ -133,6 +134,7 @@ describe('createAccessMiddleware', () => {
   });
 
   // Helper to create a mock context with full implementation
+  // eslint-disable-next-line unicorn/consistent-function-scoping
   function createFullMockContext(options: {
     env?: Partial<MoltbotEnv>;
     jwtHeader?: string;
@@ -152,10 +154,10 @@ describe('createAccessMiddleware', () => {
       headers.set('Cookie', options.cookies);
     }
 
-    const jsonMock = vi.fn().mockReturnValue(new Response());
-    const htmlMock = vi.fn().mockReturnValue(new Response());
-    const redirectMock = vi.fn().mockReturnValue(new Response());
-    const setMock = vi.fn();
+    const jsonMock = vi.fn<() => Response>().mockReturnValue(new Response());
+    const htmlMock = vi.fn<() => Response>().mockReturnValue(new Response());
+    const redirectMock = vi.fn<() => Response>().mockReturnValue(new Response());
+    const setMock = vi.fn<() => void>();
 
     const c = {
       req: {
@@ -175,7 +177,7 @@ describe('createAccessMiddleware', () => {
   it('skips auth and sets dev user when DEV_MODE is true', async () => {
     const { c, setMock } = createFullMockContext({ env: { DEV_MODE: 'true' } });
     const middleware = createAccessMiddleware({ type: 'json' });
-    const next = vi.fn();
+    const next = vi.fn<() => Promise<void>>();
 
     await middleware(c, next);
 
@@ -189,7 +191,7 @@ describe('createAccessMiddleware', () => {
   it('skips auth and sets dev user when E2E_TEST_MODE is true', async () => {
     const { c, setMock } = createFullMockContext({ env: { E2E_TEST_MODE: 'true' } });
     const middleware = createAccessMiddleware({ type: 'json' });
-    const next = vi.fn();
+    const next = vi.fn<() => Promise<void>>();
 
     await middleware(c, next);
 
@@ -203,7 +205,7 @@ describe('createAccessMiddleware', () => {
   it('returns 500 JSON error when CF Access not configured', async () => {
     const { c, jsonMock } = createFullMockContext({ env: {} });
     const middleware = createAccessMiddleware({ type: 'json' });
-    const next = vi.fn();
+    const next = vi.fn<() => Promise<void>>();
 
     await middleware(c, next);
 
@@ -217,7 +219,7 @@ describe('createAccessMiddleware', () => {
   it('returns 500 HTML error when CF Access not configured', async () => {
     const { c, htmlMock } = createFullMockContext({ env: {} });
     const middleware = createAccessMiddleware({ type: 'html' });
-    const next = vi.fn();
+    const next = vi.fn<() => Promise<void>>();
 
     await middleware(c, next);
 
@@ -230,7 +232,7 @@ describe('createAccessMiddleware', () => {
       env: { CF_ACCESS_TEAM_DOMAIN: 'team.cloudflareaccess.com', CF_ACCESS_AUD: 'aud123' },
     });
     const middleware = createAccessMiddleware({ type: 'json' });
-    const next = vi.fn();
+    const next = vi.fn<() => Promise<void>>();
 
     await middleware(c, next);
 
@@ -243,7 +245,7 @@ describe('createAccessMiddleware', () => {
       env: { CF_ACCESS_TEAM_DOMAIN: 'team.cloudflareaccess.com', CF_ACCESS_AUD: 'aud123' },
     });
     const middleware = createAccessMiddleware({ type: 'html' });
-    const next = vi.fn();
+    const next = vi.fn<() => Promise<void>>();
 
     await middleware(c, next);
 
@@ -256,7 +258,7 @@ describe('createAccessMiddleware', () => {
       env: { CF_ACCESS_TEAM_DOMAIN: 'team.cloudflareaccess.com', CF_ACCESS_AUD: 'aud123' },
     });
     const middleware = createAccessMiddleware({ type: 'html', redirectOnMissing: true });
-    const next = vi.fn();
+    const next = vi.fn<() => Promise<void>>();
 
     await middleware(c, next);
 

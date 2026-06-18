@@ -23,6 +23,9 @@
 *.aab
 *.ap_
 *.aab_
+android/app/build/
+android/.gradle/
+android/capacitor-cordova-android-plugins/
 
 # Misc
 *.pidb
