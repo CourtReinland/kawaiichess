@@ -434,7 +434,9 @@
 }
 
 .character-mini.royal {
-  box-shadow: 0 0 0 3px gold, 0 2px 6px rgba(0, 0, 0, 0.25);
+  box-shadow:
+    0 0 0 3px gold,
+    0 2px 6px rgba(0, 0, 0, 0.25);
 }
 
 .character-portrait {
@@ -510,7 +512,9 @@
   font-weight: 600;
   cursor: pointer;
   box-shadow: var(--shadow);
-  transition: transform 0.1s ease, background 0.2s ease;
+  transition:
+    transform 0.1s ease,
+    background 0.2s ease;
 }
 
 .kawaii-button:active {
@@ -759,7 +763,9 @@
   padding: 16px;
   cursor: pointer;
   box-shadow: var(--shadow);
-  transition: transform 0.15s ease, border-color 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    border-color 0.15s ease;
 }
 
 .draft-card:hover {
@@ -854,17 +860,29 @@
   padding: 20px;
   text-align: center;
   z-index: 200;
-  background: radial-gradient(circle at center, rgba(30, 10, 30, 0.96) 0%, rgba(10, 0, 15, 0.98) 100%);
+  background: radial-gradient(
+    circle at center,
+    rgba(30, 10, 30, 0.96) 0%,
+    rgba(10, 0, 15, 0.98) 100%
+  );
   color: #fff;
   animation: fadeIn 0.3s ease;
 }
 
 .battle-end-overlay.victory {
-  background: radial-gradient(circle at center, rgba(255, 105, 180, 0.95) 0%, rgba(80, 0, 60, 0.98) 100%);
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 105, 180, 0.95) 0%,
+    rgba(80, 0, 60, 0.98) 100%
+  );
 }
 
 .battle-end-overlay.defeat {
-  background: radial-gradient(circle at center, rgba(80, 80, 100, 0.95) 0%, rgba(20, 10, 30, 0.98) 100%);
+  background: radial-gradient(
+    circle at center,
+    rgba(80, 80, 100, 0.95) 0%,
+    rgba(20, 10, 30, 0.98) 100%
+  );
 }
 
 @keyframes fadeIn {
@@ -1117,7 +1135,9 @@
   object-fit: contain;
   filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.6));
   transform: translateY(0);
-  transition: transform 0.3s ease, filter 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    filter 0.3s ease;
   pointer-events: auto;
 }
 
@@ -1202,8 +1222,13 @@
 }
 
 @keyframes pulseHint {
-  0%, 100% { opacity: 0.45; }
-  50% { opacity: 0.9; }
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 0.9;
+  }
 }
 
 /* Tournament Map */
@@ -1270,7 +1295,9 @@
 }
 
 @keyframes dashFlow {
-  to { stroke-dashoffset: -28; }
+  to {
+    stroke-dashoffset: -28;
+  }
 }
 
 .map-node {
@@ -1335,8 +1362,13 @@
 }
 
 @keyframes nodePulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.06); }
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
 }
 
 /* Capture Finishing Move */
@@ -1379,7 +1411,11 @@
 .finisher-bg {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, rgba(60, 20, 60, 0.8) 0%, rgba(10, 5, 15, 0.98) 100%);
+  background: radial-gradient(
+    circle at center,
+    rgba(60, 20, 60, 0.8) 0%,
+    rgba(10, 5, 15, 0.98) 100%
+  );
 }
 
 .finisher-impact {
@@ -1466,8 +1502,14 @@
 }
 
 @keyframes finisherLinePop {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .finisher-banner {
@@ -1489,7 +1531,10 @@
 }
 
 @keyframes finisherBanner {
-  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
 }
 
 /* Slash */
@@ -1498,7 +1543,9 @@
 }
 
 .capture-finisher.anim-slash .finisher-defender {
-  animation: defenderShake 0.25s ease, defenderKO 0.55s ease 0.35s forwards;
+  animation:
+    defenderShake 0.25s ease,
+    defenderKO 0.55s ease 0.35s forwards;
 }
 
 .capture-finisher.anim-slash .finisher-impact {
@@ -1508,11 +1555,15 @@
 
 /* Magic */
 .capture-finisher.anim-magic .finisher-attacker {
-  animation: magicCharge 0.5s ease-in-out, magicLunge 0.5s ease-in 0.5s forwards;
+  animation:
+    magicCharge 0.5s ease-in-out,
+    magicLunge 0.5s ease-in 0.5s forwards;
 }
 
 .capture-finisher.anim-magic .finisher-defender {
-  animation: defenderShake 0.3s ease 0.6s, defenderKO 0.6s ease 0.9s forwards;
+  animation:
+    defenderShake 0.3s ease 0.6s,
+    defenderKO 0.6s ease 0.9s forwards;
 }
 
 .capture-finisher.anim-magic .finisher-impact {
@@ -1526,7 +1577,9 @@
 }
 
 .capture-finisher.anim-crush .finisher-defender {
-  animation: defenderSquash 0.3s ease 0.45s forwards, defenderKO 0.5s ease 0.75s forwards;
+  animation:
+    defenderSquash 0.3s ease 0.45s forwards,
+    defenderKO 0.5s ease 0.75s forwards;
 }
 
 .capture-finisher.anim-crush .finisher-impact {
@@ -1536,7 +1589,9 @@
 
 /* Charm */
 .capture-finisher.anim-charm .finisher-attacker {
-  animation: charmPose 0.6s ease-in-out, charmLunge 0.4s ease 0.6s forwards;
+  animation:
+    charmPose 0.6s ease-in-out,
+    charmLunge 0.4s ease 0.6s forwards;
 }
 
 .capture-finisher.anim-charm .finisher-defender {
@@ -1554,7 +1609,9 @@
 }
 
 .capture-finisher.anim-bite .finisher-defender {
-  animation: defenderShake 0.2s ease, defenderKO 0.55s ease 0.3s forwards;
+  animation:
+    defenderShake 0.2s ease,
+    defenderKO 0.55s ease 0.3s forwards;
 }
 
 .capture-finisher.anim-bite .finisher-impact {
@@ -1563,73 +1620,149 @@
 }
 
 @keyframes slashLunge {
-  0% { transform: translateX(0) scale(1); }
-  50% { transform: translateX(20vw) scale(1.1); }
-  100% { transform: translateX(10vw) scale(1); }
+  0% {
+    transform: translateX(0) scale(1);
+  }
+  50% {
+    transform: translateX(20vw) scale(1.1);
+  }
+  100% {
+    transform: translateX(10vw) scale(1);
+  }
 }
 
 @keyframes magicCharge {
-  0% { filter: brightness(1); }
-  100% { filter: brightness(1.4) drop-shadow(0 0 20px rgba(180, 100, 255, 0.8)); }
+  0% {
+    filter: brightness(1);
+  }
+  100% {
+    filter: brightness(1.4) drop-shadow(0 0 20px rgba(180, 100, 255, 0.8));
+  }
 }
 
 @keyframes magicLunge {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(18vw); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(18vw);
+  }
 }
 
 @keyframes crushJump {
-  0% { transform: translateY(0) scale(1); }
-  40% { transform: translateY(-18vh) scale(1.1); }
-  60% { transform: translateY(0) scale(1.2); }
-  100% { transform: translateY(0) scale(1); }
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  40% {
+    transform: translateY(-18vh) scale(1.1);
+  }
+  60% {
+    transform: translateY(0) scale(1.2);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
 }
 
 @keyframes charmPose {
-  0%, 100% { transform: rotate(0); }
-  50% { transform: rotate(-5deg) scale(1.05); }
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  50% {
+    transform: rotate(-5deg) scale(1.05);
+  }
 }
 
 @keyframes charmLunge {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(16vw); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(16vw);
+  }
 }
 
 @keyframes biteLunge {
-  0% { transform: translateX(0); }
-  50% { transform: translateX(22vw) scale(1.15); }
-  100% { transform: translateX(12vw) scale(1); }
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(22vw) scale(1.15);
+  }
+  100% {
+    transform: translateX(12vw) scale(1);
+  }
 }
 
 @keyframes defenderShake {
-  0%, 100% { transform: translateX(0); }
-  20% { transform: translateX(-8px); }
-  40% { transform: translateX(8px); }
-  60% { transform: translateX(-6px); }
-  80% { transform: translateX(6px); }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-8px);
+  }
+  40% {
+    transform: translateX(8px);
+  }
+  60% {
+    transform: translateX(-6px);
+  }
+  80% {
+    transform: translateX(6px);
+  }
 }
 
 @keyframes defenderKO {
-  0% { transform: rotate(0) translateY(0); opacity: 1; }
-  40% { transform: rotate(12deg) translateY(8vh); opacity: 0.8; }
-  100% { transform: rotate(25deg) translateY(45vh); opacity: 0; }
+  0% {
+    transform: rotate(0) translateY(0);
+    opacity: 1;
+  }
+  40% {
+    transform: rotate(12deg) translateY(8vh);
+    opacity: 0.8;
+  }
+  100% {
+    transform: rotate(25deg) translateY(45vh);
+    opacity: 0;
+  }
 }
 
 @keyframes defenderSquash {
-  0% { transform: scale(1); }
-  100% { transform: scale(0.7, 0.5); }
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.7, 0.5);
+  }
 }
 
 @keyframes defenderSwoon {
-  0% { transform: rotate(0) translateY(0); opacity: 1; }
-  50% { transform: rotate(-10deg) translateY(4vh); opacity: 0.9; }
-  100% { transform: rotate(-20deg) translateY(35vh); opacity: 0; }
+  0% {
+    transform: rotate(0) translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: rotate(-10deg) translateY(4vh);
+    opacity: 0.9;
+  }
+  100% {
+    transform: rotate(-20deg) translateY(35vh);
+    opacity: 0;
+  }
 }
 
 @keyframes impactFlash {
-  0% { opacity: 0; }
-  50% { opacity: 1; }
-  100% { opacity: 0; }
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 /* Captain dialogue after finishing move */
@@ -1647,7 +1780,11 @@
 .captain-dialogue-bg {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, rgba(30, 15, 40, 0.85) 0%, rgba(5, 5, 16, 0.98) 100%);
+  background: radial-gradient(
+    circle at center,
+    rgba(30, 15, 40, 0.85) 0%,
+    rgba(5, 5, 16, 0.98) 100%
+  );
 }
 
 .captain-portraits {

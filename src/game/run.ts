@@ -218,7 +218,9 @@ export function acceptDraft(run: RunState, pieceId: string): RunState {
   };
 }
 
-export function buildDeployPieces(run: RunState): { id: string; definitionId: string; position?: Position }[] {
+export function buildDeployPieces(
+  run: RunState,
+): { id: string; definitionId: string; position?: Position }[] {
   return run.playerArmy.map((definitionId, index) => {
     const id = `${definitionId}-${index}`;
     return {

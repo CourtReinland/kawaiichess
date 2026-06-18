@@ -215,7 +215,13 @@ export function getValidMoves(state: BattleState, pieceId: string): Move[] {
       moves = generateSlidingMoves(state, piece, slidingDirections('bishop'), BOARD_WIDTH, false);
       break;
     case 'bishop-range':
-      moves = generateSlidingMoves(state, piece, slidingDirections('bishop'), def.range ?? 4, false);
+      moves = generateSlidingMoves(
+        state,
+        piece,
+        slidingDirections('bishop'),
+        def.range ?? 4,
+        false,
+      );
       break;
     case 'knight':
       moves = generateKnightMoves(state, piece);

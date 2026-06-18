@@ -1,5 +1,13 @@
 import type { BattleState, Move, PieceInstance, Position, Side } from './types';
-import { applyMove, checkBattleEnd, findRoyal, getDefinition, getValidMoves, isEnemy, switchTurn } from './board';
+import {
+  applyMove,
+  checkBattleEnd,
+  findRoyal,
+  getDefinition,
+  getValidMoves,
+  isEnemy,
+  switchTurn,
+} from './board';
 
 const PIECE_VALUES: Record<string, number> = {
   king: 20000,

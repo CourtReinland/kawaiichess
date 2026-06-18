@@ -18,7 +18,7 @@ export const STORY_SCENES: Record<string, StoryScene> = {
       {
         speaker: 'Hana',
         speakerPieceId: 'king',
-        text: 'Nobody expects us to win a single match. But we didn\'t come this far to lose with grace.',
+        text: "Nobody expects us to win a single match. But we didn't come this far to lose with grace.",
         position: 'left',
       },
       {
@@ -30,7 +30,7 @@ export const STORY_SCENES: Record<string, StoryScene> = {
       {
         speaker: 'Kira',
         speakerPieceId: 'final-boss-queen',
-        text: 'Did someone say prayer-school? Hana, you actually showed up. I was hoping you\'d chicken out and save us all the embarrassment.',
+        text: "Did someone say prayer-school? Hana, you actually showed up. I was hoping you'd chicken out and save us all the embarrassment.",
         position: 'right',
       },
       {
@@ -42,19 +42,19 @@ export const STORY_SCENES: Record<string, StoryScene> = {
       {
         speaker: 'Kira',
         speakerPieceId: 'final-boss-queen',
-        text: 'Bully? I\'m just being honest. You\'ll fight six other schools before you ever face me. If you even make it that far, I\'ll be waiting at the end.',
+        text: "Bully? I'm just being honest. You'll fight six other schools before you ever face me. If you even make it that far, I'll be waiting at the end.",
         position: 'right',
       },
       {
         speaker: 'Mira',
         speakerPieceId: 'queen',
-        text: 'Let her wait. We\'ve got a bracket to burn through.',
+        text: "Let her wait. We've got a bracket to burn through.",
         position: 'right',
       },
       {
         speaker: 'Hana',
         speakerPieceId: 'king',
-        text: 'Then let\'s give them a match they\'ll pray to forget. Alishan Academy—move out!',
+        text: "Then let's give them a match they'll pray to forget. Alishan Academy—move out!",
         position: 'left',
       },
     ],
@@ -84,13 +84,13 @@ export const STORY_SCENES: Record<string, StoryScene> = {
       {
         speaker: 'Kira',
         speakerPieceId: 'final-boss-queen',
-        text: 'People change. I learned that the night you chose your prayers over me. Let\'s see if your god can save your king.',
+        text: "People change. I learned that the night you chose your prayers over me. Let's see if your god can save your king.",
         position: 'right',
       },
       {
         speaker: 'Mira',
         speakerPieceId: 'queen',
-        text: 'Hana, focus. Whatever history she\'s dragging up, win first and cry later.',
+        text: "Hana, focus. Whatever history she's dragging up, win first and cry later.",
         position: 'right',
       },
     ],
@@ -109,13 +109,13 @@ export const STORY_SCENES: Record<string, StoryScene> = {
       {
         speaker: 'Hana',
         speakerPieceId: 'king',
-        text: 'I didn\'t need to read shadows. I just remembered how you used to smile when you won fair.',
+        text: "I didn't need to read shadows. I just remembered how you used to smile when you won fair.",
         position: 'left',
       },
       {
         speaker: 'Kira',
         speakerPieceId: 'final-boss-queen',
-        text: 'Shut up. Next time I won\'t hold back... and neither will my memories.',
+        text: "Shut up. Next time I won't hold back... and neither will my memories.",
         position: 'right',
       },
     ],
@@ -134,7 +134,7 @@ export const STORY_SCENES: Record<string, StoryScene> = {
       {
         speaker: 'Hana',
         speakerPieceId: 'king',
-        text: 'This isn\'t over, Kira. I don\'t care how dark your school is—I\'ll find the light switch.',
+        text: "This isn't over, Kira. I don't care how dark your school is—I'll find the light switch.",
         position: 'left',
       },
     ],
@@ -146,7 +146,7 @@ export const STORY_SCENES: Record<string, StoryScene> = {
     dialogue: [
       {
         speaker: 'Narrator',
-      text: 'Match 2. Seishin High, where the koto hums and every opening is a purification ritual.',
+        text: 'Match 2. Seishin High, where the koto hums and every opening is a purification ritual.',
         position: 'center',
       },
       {
@@ -158,7 +158,7 @@ export const STORY_SCENES: Record<string, StoryScene> = {
       {
         speaker: 'Hana',
         speakerPieceId: 'king',
-        text: 'We\'re not here to cause trouble, Sakura-san. Just to play the best chess we can.',
+        text: "We're not here to cause trouble, Sakura-san. Just to play the best chess we can.",
         position: 'left',
       },
       {
@@ -214,19 +214,19 @@ export const STORY_SCENES: Record<string, StoryScene> = {
       {
         speaker: 'Candy',
         speakerPieceId: 'candy-witch',
-        text: 'Hiiii~! Welcome to my sweet little forest. I baked cookies for the loser\'s bracket!',
+        text: "Hiiii~! Welcome to my sweet little forest. I baked cookies for the loser's bracket!",
         position: 'right',
       },
       {
         speaker: 'Mira',
         speakerPieceId: 'queen',
-        text: 'Her smile is a warning label. Don\'t eat anything, don\'t trust anything, don\'t let her giggle distract you.',
+        text: "Her smile is a warning label. Don't eat anything, don't trust anything, don't let her giggle distract you.",
         position: 'right',
       },
       {
         speaker: 'Candy',
         speakerPieceId: 'candy-witch',
-        text: 'Aww, you\'re no fun. But I promise—the checkmate will be delicious.',
+        text: "Aww, you're no fun. But I promise—the checkmate will be delicious.",
         position: 'right',
       },
     ],
@@ -245,7 +245,7 @@ export const STORY_SCENES: Record<string, StoryScene> = {
       {
         speaker: 'Hana',
         speakerPieceId: 'king',
-        text: 'Sorry, Candy. I\'m diabetic when it comes to losing.',
+        text: "Sorry, Candy. I'm diabetic when it comes to losing.",
         position: 'left',
       },
     ],
@@ -258,7 +258,7 @@ export const STORY_SCENES: Record<string, StoryScene> = {
       {
         speaker: 'Candy',
         speakerPieceId: 'candy-witch',
-        text: 'Aww, you fell for the licorice gambit. Don\'t worry, losing tastes bitter but it builds character!',
+        text: "Aww, you fell for the licorice gambit. Don't worry, losing tastes bitter but it builds character!",
         position: 'right',
       },
     ],
@@ -276,31 +276,31 @@ export const STORY_SCENES: Record<string, StoryScene> = {
       {
         speaker: 'Ren',
         speakerPieceId: 'thunder-samurai',
-        text: 'So you\'re the prayer-school captain everyone\'s whispering about. You look smaller than the rumors.',
+        text: "So you're the prayer-school captain everyone's whispering about. You look smaller than the rumors.",
         position: 'right',
       },
       {
         speaker: 'Hana',
         speakerPieceId: 'king',
-        text: 'And you\'re louder than the rumors, Ren-kun. Is that a strategy or a volume problem?',
+        text: "And you're louder than the rumors, Ren-kun. Is that a strategy or a volume problem?",
         position: 'left',
       },
       {
         speaker: 'Ren',
         speakerPieceId: 'thunder-samurai',
-        text: 'Heh. Cute. I\'ll make you a deal, chapel girl—if you survive thirty moves, I\'ll buy you ramen after.',
+        text: "Heh. Cute. I'll make you a deal, chapel girl—if you survive thirty moves, I'll buy you ramen after.",
         position: 'right',
       },
       {
         speaker: 'Mira',
         speakerPieceId: 'queen',
-        text: 'Hana, he\'s flirting and threatening at the same time. That\'s either charming or deeply unprofessional.',
+        text: "Hana, he's flirting and threatening at the same time. That's either charming or deeply unprofessional.",
         position: 'right',
       },
       {
         speaker: 'Hana',
         speakerPieceId: 'king',
-        text: 'Let\'s just say I\'m ordering the extra-large bowl. Of victory.',
+        text: "Let's just say I'm ordering the extra-large bowl. Of victory.",
         position: 'left',
       },
     ],
@@ -313,13 +313,13 @@ export const STORY_SCENES: Record<string, StoryScene> = {
       {
         speaker: 'Ren',
         speakerPieceId: 'thunder-samurai',
-        text: 'Thirty moves? You crushed me in twenty-four. I... I think I\'m in love.',
+        text: "Thirty moves? You crushed me in twenty-four. I... I think I'm in love.",
         position: 'right',
       },
       {
         speaker: 'Hana',
         speakerPieceId: 'king',
-        text: 'Ramen\'s still on you, samurai. And maybe you can teach me that lightning dash sometime.',
+        text: "Ramen's still on you, samurai. And maybe you can teach me that lightning dash sometime.",
         position: 'left',
       },
       {
@@ -356,25 +356,25 @@ export const STORY_SCENES: Record<string, StoryScene> = {
       {
         speaker: 'Yuki',
         speakerPieceId: 'kitsune-trickster',
-        text: 'Hana-chan~! I\'ve been waiting for you. Or was that your reflection? Even I get confused.',
+        text: "Hana-chan~! I've been waiting for you. Or was that your reflection? Even I get confused.",
         position: 'right',
       },
       {
         speaker: 'Hana',
         speakerPieceId: 'king',
-        text: 'I don\'t have time for riddles, Yuki. We\'re here to play chess, not hide-and-seek.',
+        text: "I don't have time for riddles, Yuki. We're here to play chess, not hide-and-seek.",
         position: 'left',
       },
       {
         speaker: 'Yuki',
         speakerPieceId: 'kitsune-trickster',
-        text: 'So serious~ But I bet you\'d smile if I stole just one little kiss instead of a piece.',
+        text: "So serious~ But I bet you'd smile if I stole just one little kiss instead of a piece.",
         position: 'right',
       },
       {
         speaker: 'Mira',
         speakerPieceId: 'queen',
-        text: 'She\'s trying to throw you off. Hana, eyes on the board, not the tails.',
+        text: "She's trying to throw you off. Hana, eyes on the board, not the tails.",
         position: 'right',
       },
     ],
@@ -393,7 +393,7 @@ export const STORY_SCENES: Record<string, StoryScene> = {
       {
         speaker: 'Hana',
         speakerPieceId: 'king',
-        text: 'Save it for the next tournament. And Yuki? Keep your tails out of my king\'s row.',
+        text: "Save it for the next tournament. And Yuki? Keep your tails out of my king's row.",
         position: 'left',
       },
     ],
@@ -406,7 +406,7 @@ export const STORY_SCENES: Record<string, StoryScene> = {
       {
         speaker: 'Yuki',
         speakerPieceId: 'kitsune-trickster',
-        text: 'Aww, you fell for the fake smile. Don\'t feel bad—my illusions are very pretty.',
+        text: "Aww, you fell for the fake smile. Don't feel bad—my illusions are very pretty.",
         position: 'right',
       },
     ],
@@ -430,13 +430,13 @@ export const STORY_SCENES: Record<string, StoryScene> = {
       {
         speaker: 'Hana',
         speakerPieceId: 'king',
-        text: 'We didn\'t come here to read horoscopes, Luna. We came to rewrite them.',
+        text: "We didn't come here to read horoscopes, Luna. We came to rewrite them.",
         position: 'left',
       },
       {
         speaker: 'Luna',
         speakerPieceId: 'celestial-mage',
-        text: 'Spoken like a comet that doesn\'t know it\'s burning out. Let the stars decide.',
+        text: "Spoken like a comet that doesn't know it's burning out. Let the stars decide.",
         position: 'right',
       },
     ],
@@ -449,7 +449,7 @@ export const STORY_SCENES: Record<string, StoryScene> = {
       {
         speaker: 'Luna',
         speakerPieceId: 'celestial-mage',
-        text: 'The chart lied. Or perhaps... it simply hadn\'t seen you before.',
+        text: "The chart lied. Or perhaps... it simply hadn't seen you before.",
         position: 'right',
       },
       {
@@ -486,7 +486,7 @@ export const STORY_SCENES: Record<string, StoryScene> = {
       {
         speaker: 'Victoria',
         speakerPieceId: 'demon-queen',
-        text: 'Little Hana. Do you know why I\'ve been watching your matches? Because you remind me of someone I used to be.',
+        text: "Little Hana. Do you know why I've been watching your matches? Because you remind me of someone I used to be.",
         position: 'right',
       },
       {
@@ -504,13 +504,13 @@ export const STORY_SCENES: Record<string, StoryScene> = {
       {
         speaker: 'Victoria',
         speakerPieceId: 'demon-queen',
-        text: 'Beat me, and Alishan takes the cohort. Lose, and you\'ll learn why mercy is a luxury champions can\'t afford.',
+        text: "Beat me, and Alishan takes the cohort. Lose, and you'll learn why mercy is a luxury champions can't afford.",
         position: 'right',
       },
       {
         speaker: 'Hana',
         speakerPieceId: 'king',
-        text: 'I don\'t need mercy. I need my team. And they\'ve never let me pray alone.',
+        text: "I don't need mercy. I need my team. And they've never let me pray alone.",
         position: 'left',
       },
     ],
@@ -523,19 +523,19 @@ export const STORY_SCENES: Record<string, StoryScene> = {
       {
         speaker: 'Victoria',
         speakerPieceId: 'demon-queen',
-        text: 'Checkmate. From a prayer-school. I would laugh if I weren\'t... proud.',
+        text: "Checkmate. From a prayer-school. I would laugh if I weren't... proud.",
         position: 'right',
       },
       {
         speaker: 'Hana',
         speakerPieceId: 'king',
-        text: 'You\'re not alone, Victoria. Even on a throne. If you ever want to remember how to smile, Alishan\'s chapel is open.',
+        text: "You're not alone, Victoria. Even on a throne. If you ever want to remember how to smile, Alishan's chapel is open.",
         position: 'left',
       },
       {
         speaker: 'Victoria',
         speakerPieceId: 'demon-queen',
-        text: '...Idiot. Take your cohort. And take this too—my respect. It\'s heavier than it looks.',
+        text: "...Idiot. Take your cohort. And take this too—my respect. It's heavier than it looks.",
         position: 'right',
       },
       {
@@ -559,7 +559,7 @@ export const STORY_SCENES: Record<string, StoryScene> = {
       {
         speaker: 'Hana',
         speakerPieceId: 'king',
-        text: 'Next year... I won\'t be praying alone. Count on it.',
+        text: "Next year... I won't be praying alone. Count on it.",
         position: 'left',
       },
     ],
@@ -572,19 +572,19 @@ export const STORY_SCENES: Record<string, StoryScene> = {
       {
         speaker: 'Kira',
         speakerPieceId: 'final-boss-queen',
-        text: 'One win. Cute. I\'ve seen first-years do better in practice matches.',
+        text: "One win. Cute. I've seen first-years do better in practice matches.",
         position: 'right',
       },
       {
         speaker: 'Hana',
         speakerPieceId: 'king',
-        text: 'And I\'ve seen old friends forget how to be kind. Guess we\'re both disappointed.',
+        text: "And I've seen old friends forget how to be kind. Guess we're both disappointed.",
         position: 'left',
       },
       {
         speaker: 'Kira',
         speakerPieceId: 'final-boss-queen',
-        text: 'Save the sermon. You\'re still six matches from me.',
+        text: "Save the sermon. You're still six matches from me.",
         position: 'right',
       },
     ],
@@ -597,19 +597,19 @@ export const STORY_SCENES: Record<string, StoryScene> = {
       {
         speaker: 'Kira',
         speakerPieceId: 'final-boss-queen',
-        text: 'Two down. The saccharine one must\'ve given you cavities.',
+        text: "Two down. The saccharine one must've given you cavities.",
         position: 'right',
       },
       {
         speaker: 'Mira',
         speakerPieceId: 'queen',
-        text: 'We\'re winning. You\'re watching. Seems like the right arrangement.',
+        text: "We're winning. You're watching. Seems like the right arrangement.",
         position: 'left',
       },
       {
         speaker: 'Kira',
         speakerPieceId: 'final-boss-queen',
-        text: 'Keep talking, vice-captain. You\'ll choke on those words eventually.',
+        text: "Keep talking, vice-captain. You'll choke on those words eventually.",
         position: 'right',
       },
     ],
@@ -622,7 +622,7 @@ export const STORY_SCENES: Record<string, StoryScene> = {
       {
         speaker: 'Kira',
         speakerPieceId: 'final-boss-queen',
-        text: 'Half the bracket gone and you\'re still standing. Fine. I\'ll admit that\'s mildly impressive.',
+        text: "Half the bracket gone and you're still standing. Fine. I'll admit that's mildly impressive.",
         position: 'right',
       },
       {
@@ -634,7 +634,7 @@ export const STORY_SCENES: Record<string, StoryScene> = {
       {
         speaker: 'Kira',
         speakerPieceId: 'final-boss-queen',
-        text: 'That was before you chose hymns over me. Don\'t bring up the past unless you\'re ready to lose in it.',
+        text: "That was before you chose hymns over me. Don't bring up the past unless you're ready to lose in it.",
         position: 'right',
       },
     ],
@@ -647,7 +647,7 @@ export const STORY_SCENES: Record<string, StoryScene> = {
       {
         speaker: 'Kira',
         speakerPieceId: 'final-boss-queen',
-        text: 'You\'re past the halfway mark. People are starting to say Alishan might actually belong here.',
+        text: "You're past the halfway mark. People are starting to say Alishan might actually belong here.",
         position: 'right',
       },
       {
@@ -659,7 +659,7 @@ export const STORY_SCENES: Record<string, StoryScene> = {
       {
         speaker: 'Kira',
         speakerPieceId: 'final-boss-queen',
-        text: 'Spoken like someone who\'s never had the crown within reach and then watched it slip away.',
+        text: "Spoken like someone who's never had the crown within reach and then watched it slip away.",
         position: 'right',
       },
     ],
@@ -672,19 +672,19 @@ export const STORY_SCENES: Record<string, StoryScene> = {
       {
         speaker: 'Kira',
         speakerPieceId: 'final-boss-queen',
-        text: 'One match left before me. The throne academy won\'t go easy. Neither will I.',
+        text: "One match left before me. The throne academy won't go easy. Neither will I.",
         position: 'right',
       },
       {
         speaker: 'Mira',
         speakerPieceId: 'queen',
-        text: 'You\'re already scouting us? Worried?',
+        text: "You're already scouting us? Worried?",
         position: 'left',
       },
       {
         speaker: 'Kira',
         speakerPieceId: 'final-boss-queen',
-        text: 'Worried? I\'m making sure the finale is worth my time. Don\'t disappoint me, Hana.',
+        text: "Worried? I'm making sure the finale is worth my time. Don't disappoint me, Hana.",
         position: 'right',
       },
     ],

@@ -8,18 +8,29 @@ interface DraftScreenProps {
   playerAcademy: AcademyDefinition;
 }
 
-export function DraftScreen({ options, onSelect, onSkip, stageName, playerAcademy }: DraftScreenProps) {
+export function DraftScreen({
+  options,
+  onSelect,
+  onSkip,
+  stageName,
+  playerAcademy,
+}: DraftScreenProps) {
   return (
     <div className="overlay-screen">
       <h2>Match Won! 🌸</h2>
       <div className="academy-matchup">
         <div className="academy-matchup-side">
-          <img src={`/academies/${playerAcademy.crestImage}`} alt={playerAcademy.name} className="academy-crest" />
+          <img
+            src={`/academies/${playerAcademy.crestImage}`}
+            alt={playerAcademy.name}
+            className="academy-crest"
+          />
           <strong>{playerAcademy.name}</strong>
         </div>
       </div>
       <p>
-        You cleared <strong>{stageName}</strong>. A new transfer student wants to join your chess club:
+        You cleared <strong>{stageName}</strong>. A new transfer student wants to join your chess
+        club:
       </p>
       <div className="draft-options">
         {options.map((piece) => (
@@ -39,7 +50,9 @@ export function DraftScreen({ options, onSelect, onSkip, stageName, playerAcadem
               <div className="icon">{piece.icon}</div>
             )}
             <h3>{piece.name}</h3>
-            <div className="tier">Tier {piece.tier} • {piece.category}</div>
+            <div className="tier">
+              Tier {piece.tier} • {piece.category}
+            </div>
             {piece.personality && <p className="personality">{piece.personality}</p>}
             {piece.flavorQuote && <p className="quote">{piece.flavorQuote}</p>}
             <p>{piece.movement} movement</p>

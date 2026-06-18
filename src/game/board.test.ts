@@ -41,28 +41,19 @@ describe('createBattleState', () => {
 
 describe('move generation', () => {
   it('generates rook moves', () => {
-    const state = createBattleState(
-      [{ definitionId: 'rook', position: { x: 3, y: 3 } }],
-      [],
-    );
+    const state = createBattleState([{ definitionId: 'rook', position: { x: 3, y: 3 } }], []);
     const moves = getValidMoves(state, state.pieces[0].id);
     expect(moves.length).toBe(14);
   });
 
   it('generates knight moves', () => {
-    const state = createBattleState(
-      [{ definitionId: 'knight', position: { x: 3, y: 3 } }],
-      [],
-    );
+    const state = createBattleState([{ definitionId: 'knight', position: { x: 3, y: 3 } }], []);
     const moves = getValidMoves(state, state.pieces[0].id);
     expect(moves.length).toBe(8);
   });
 
   it('generates king moves', () => {
-    const state = createBattleState(
-      [{ definitionId: 'king', position: { x: 4, y: 4 } }],
-      [],
-    );
+    const state = createBattleState([{ definitionId: 'king', position: { x: 4, y: 4 } }], []);
     const moves = getValidMoves(state, state.pieces[0].id);
     expect(moves.length).toBe(8);
   });
@@ -92,10 +83,7 @@ describe('move generation', () => {
   });
 
   it('generates pawn initial two-step', () => {
-    const state = createBattleState(
-      [{ definitionId: 'pawn', position: { x: 3, y: 1 } }],
-      [],
-    );
+    const state = createBattleState([{ definitionId: 'pawn', position: { x: 3, y: 1 } }], []);
     const moves = getValidMoves(state, state.pieces[0].id);
     expect(moves.some((m) => m.to.x === 3 && m.to.y === 3)).toBe(true);
   });
@@ -103,10 +91,7 @@ describe('move generation', () => {
 
 describe('applyMove', () => {
   it('moves a piece', () => {
-    const state = createBattleState(
-      [{ definitionId: 'rook', position: { x: 3, y: 3 } }],
-      [],
-    );
+    const state = createBattleState([{ definitionId: 'rook', position: { x: 3, y: 3 } }], []);
     const piece = state.pieces[0];
     const move: Move = { pieceId: piece.id, from: piece.position, to: { x: 3, y: 6 } };
     const next = applyMove(state, move);
@@ -120,7 +105,12 @@ describe('applyMove', () => {
       [{ definitionId: 'king', position: { x: 3, y: 6 } }],
     );
     const piece = state.pieces[0];
-    const move: Move = { pieceId: piece.id, from: piece.position, to: { x: 3, y: 6 }, capture: state.pieces[1] };
+    const move: Move = {
+      pieceId: piece.id,
+      from: piece.position,
+      to: { x: 3, y: 6 },
+      capture: state.pieces[1],
+    };
     const next = applyMove(state, move);
     expect(next.pieces).toHaveLength(1);
     expect(findRoyal(next, 'enemy')).toBeUndefined();
@@ -142,7 +132,12 @@ describe('checkBattleEnd', () => {
       [{ definitionId: 'king', position: { x: 4, y: 7 } }],
     );
     const piece = state.pieces[0];
-    const move: Move = { pieceId: piece.id, from: piece.position, to: { x: 4, y: 7 }, capture: state.pieces[1] };
+    const move: Move = {
+      pieceId: piece.id,
+      from: piece.position,
+      to: { x: 4, y: 7 },
+      capture: state.pieces[1],
+    };
     const next = checkBattleEnd(applyMove(state, move));
     expect(next.phase).toBe('victory');
   });
@@ -153,7 +148,12 @@ describe('checkBattleEnd', () => {
       [{ definitionId: 'rook', position: { x: 4, y: 7 } }],
     );
     const enemy = state.pieces[1];
-    const move: Move = { pieceId: enemy.id, from: enemy.position, to: { x: 4, y: 0 }, capture: state.pieces[0] };
+    const move: Move = {
+      pieceId: enemy.id,
+      from: enemy.position,
+      to: { x: 4, y: 0 },
+      capture: state.pieces[0],
+    };
     const next = checkBattleEnd(applyMove(state, move));
     expect(next.phase).toBe('defeat');
   });

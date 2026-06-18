@@ -80,6 +80,12 @@ echo "APK: $APK_PATH"
 echo ""
 
 if [[ "$RUN_MODE" == true ]]; then
+  echo "→ Stopping any running instance..."
+  adb shell am force-stop com.kawaiichess.app || true
+
+  echo "→ Clearing app cache and storage (prevents stale WebView assets)..."
+  adb shell pm clear com.kawaiichess.app || true
+
   echo "→ Installing APK on connected device..."
   adb install -r "$APK_PATH"
 

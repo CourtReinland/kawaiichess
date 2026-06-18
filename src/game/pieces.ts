@@ -15,12 +15,14 @@ export const PIECE_DEFINITIONS: PieceDefinition[] = [
       range: 1,
       uses: 2,
     },
-    personality: 'Stoic student-council vice president who defends the club room with dramatic barrier magic.',
+    personality:
+      'Stoic student-council vice president who defends the club room with dramatic barrier magic.',
     flavorQuote: '"No one bullies my teammates on my watch! Barrier, deploy!"',
 
-  portraitImage: 'magical-girl-rook-portrait.jpg',
-  miniImage: 'magical-girl-rook-mini.jpg',
-  backstory: 'A transferred magical-girl fan who joined the chess club because the barrier magic classes conflicted with choir. She treats every pawn push like a transformation sequence.',
+    portraitImage: 'magical-girl-rook-portrait.jpg',
+    miniImage: 'magical-girl-rook-mini.jpg',
+    backstory:
+      'A transferred magical-girl fan who joined the chess club because the barrier magic classes conflicted with choir. She treats every pawn push like a transformation sequence.',
     icon: '🏰',
   },
   {
@@ -35,12 +37,14 @@ export const PIECE_DEFINITIONS: PieceDefinition[] = [
       trigger: 'active',
       uses: 2,
     },
-    personality: 'Silent transfer student who appears in a puff of smoke and vanishes before roll call.',
+    personality:
+      'Silent transfer student who appears in a puff of smoke and vanishes before roll call.',
     flavorQuote: '"You can\'t check what you can\'t see."',
 
-  portraitImage: 'ninja-knight-portrait.jpg',
-  miniImage: 'ninja-knight-mini.jpg',
-  backstory: 'The club\'s silent enforcer. No one knows his real name, but he once shadow-stepped across three tables to catch a falling king.',
+    portraitImage: 'ninja-knight-portrait.jpg',
+    miniImage: 'ninja-knight-mini.jpg',
+    backstory:
+      "The club's silent enforcer. No one knows his real name, but he once shadow-stepped across three tables to catch a falling king.",
     icon: '🥷',
   },
   {
@@ -56,12 +60,14 @@ export const PIECE_DEFINITIONS: PieceDefinition[] = [
       range: 1,
       uses: 2,
     },
-    personality: 'Cheerful campus idol whose chants buff allies and draw crowds at culture festivals.',
+    personality:
+      'Cheerful campus idol whose chants buff allies and draw crowds at culture festivals.',
     flavorQuote: '"Everyone, cheer with me—range up!"',
 
-  portraitImage: 'idol-bishop-portrait.jpg',
-  miniImage: 'idol-bishop-mini.jpg',
-  backstory: 'An aspiring school idol who accidentally joined the chess club thinking it was the "cheer club." She stayed when she realized bishops move diagonally "like dance formations."',
+    portraitImage: 'idol-bishop-portrait.jpg',
+    miniImage: 'idol-bishop-mini.jpg',
+    backstory:
+      'An aspiring school idol who accidentally joined the chess club thinking it was the "cheer club." She stayed when she realized bishops move diagonally "like dance formations."',
     icon: '🎤',
   },
   {
@@ -80,9 +86,10 @@ export const PIECE_DEFINITIONS: PieceDefinition[] = [
     personality: 'Proud royal who joined the club to prove she can rise from kōhai to queen.',
     flavorQuote: '"Just you wait—by the far rank, I\'ll be unstoppable!"',
 
-  portraitImage: 'dragon-princess-portrait.jpg',
-  miniImage: 'dragon-princess-mini.jpg',
-  backstory: 'A first-year noble who insists she will "promote to greatness" by the end of the tournament. Her pride is matched only by her surprising kindness to pawns.',
+    portraitImage: 'dragon-princess-portrait.jpg',
+    miniImage: 'dragon-princess-mini.jpg',
+    backstory:
+      'A first-year noble who insists she will "promote to greatness" by the end of the tournament. Her pride is matched only by her surprising kindness to pawns.',
     icon: '🐉',
   },
   {
@@ -98,15 +105,17 @@ export const PIECE_DEFINITIONS: PieceDefinition[] = [
       range: 1,
       uses: 2,
     },
-    personality: 'Gentle purifier who cleanses curses, offers tea, and never misses morning practice.',
+    personality:
+      'Gentle purifier who cleanses curses, offers tea, and never misses morning practice.',
     flavorQuote: '"A calm board is a clean board. Purify!"',
 
-  portraitImage: 'sakura-portrait.jpg',
-  miniImage: 'sakura-mini.jpg',
-  backstory: 'Sakura captains Seishin High\'s shrine chess team. She sees the board as a sacred space and treats every match as a purification ritual between schools.',
-  relationships: {
-    'king': 'Sakura finds Hana\'s earnest prayers familiar and a little dangerous—too much faith can make a player predictable.'
-  },
+    portraitImage: 'sakura-portrait.jpg',
+    miniImage: 'sakura-mini.jpg',
+    backstory:
+      "Sakura captains Seishin High's shrine chess team. She sees the board as a sacred space and treats every match as a purification ritual between schools.",
+    relationships: {
+      king: "Sakura finds Hana's earnest prayers familiar and a little dangerous—too much faith can make a player predictable.",
+    },
     icon: '⛩️',
   },
   {
@@ -119,9 +128,10 @@ export const PIECE_DEFINITIONS: PieceDefinition[] = [
     personality: 'Eager first-year who studies openings every night and dreams of promotion.',
     flavorQuote: '"One step at a time… I\'ll make senpai proud!"',
 
-  portraitImage: 'schoolgirl-pawn-portrait.jpg',
-  miniImage: 'schoolgirl-pawn-mini.jpg',
-  backstory: 'The most junior member of Alishan\'s club. She studies openings every night and dreams of promotion—not just on the board, but into someone the team can rely on.',
+    portraitImage: 'schoolgirl-pawn-portrait.jpg',
+    miniImage: 'schoolgirl-pawn-mini.jpg',
+    backstory:
+      "The most junior member of Alishan's club. She studies openings every night and dreams of promotion—not just on the board, but into someone the team can rely on.",
     icon: '🎒',
   },
 
@@ -141,11 +151,13 @@ export const PIECE_DEFINITIONS: PieceDefinition[] = [
       range: 1,
       uses: 2,
     },
-    personality: 'Calm shrine priestess who leads Seishin High with measured steps and quiet prayers.',
+    personality:
+      'Calm shrine priestess who leads Seishin High with measured steps and quiet prayers.',
     flavorQuote: '"The board is a sacred space. I will not let it be defiled."',
     portraitImage: 'seishin-king-portrait.jpg',
     miniImage: 'seishin-king-mini.jpg',
-    backstory: 'Sakura captains Seishin High\'s shrine chess team. She sees every match as a purification ritual between schools, and her king is never rushed.',
+    backstory:
+      "Sakura captains Seishin High's shrine chess team. She sees every match as a purification ritual between schools, and her king is never rushed.",
     uniformTheme: 'seishin',
     enemyOnly: true,
     icon: '⛩️',
@@ -167,7 +179,8 @@ export const PIECE_DEFINITIONS: PieceDefinition[] = [
     flavorQuote: '"Ring once for protection, ring twice for victory."',
     portraitImage: 'seishin-bishop-portrait.jpg',
     miniImage: 'seishin-bishop-mini.jpg',
-    backstory: 'A second-year miko who joined the chess club after realizing diagonal movements mirror the paths of shrine rituals.',
+    backstory:
+      'A second-year miko who joined the chess club after realizing diagonal movements mirror the paths of shrine rituals.',
     uniformTheme: 'seishin',
     enemyOnly: true,
     icon: '🔔',
@@ -183,7 +196,8 @@ export const PIECE_DEFINITIONS: PieceDefinition[] = [
     flavorQuote: '"One step closer to the sacred rank…"',
     portraitImage: 'seishin-pawn-portrait.jpg',
     miniImage: 'seishin-pawn-mini.jpg',
-    backstory: 'The youngest member of Seishin\'s team. She sweeps the courtyard before dawn and studies pawn breaks by lantern light.',
+    backstory:
+      "The youngest member of Seishin's team. She sweeps the courtyard before dawn and studies pawn breaks by lantern light.",
     uniformTheme: 'seishin',
     enemyOnly: true,
     icon: '🎐',
@@ -360,9 +374,10 @@ export const PIECE_DEFINITIONS: PieceDefinition[] = [
     personality: 'Elegant third-year who dances from target to target under falling petals.',
     flavorQuote: '"Blossom, fall, strike—three moves, one ko."',
 
-  portraitImage: 'sakura-assassin-portrait.jpg',
-  miniImage: 'sakura-assassin-mini.jpg',
-  backstory: 'A third-year from an unaffiliated dojo who enters the tournament as a ringer. She says she fights alone, but keeps glancing at Alishan\'s bench.',
+    portraitImage: 'sakura-assassin-portrait.jpg',
+    miniImage: 'sakura-assassin-mini.jpg',
+    backstory:
+      "A third-year from an unaffiliated dojo who enters the tournament as a ringer. She says she fights alone, but keeps glancing at Alishan's bench.",
     icon: '🌸',
   },
   {
@@ -381,12 +396,14 @@ export const PIECE_DEFINITIONS: PieceDefinition[] = [
     personality: 'Mysterious stargazer who bends space for a better angle.',
     flavorQuote: '"The stars aligned… right behind your king."',
 
-  portraitImage: 'luna-portrait.jpg',
-  miniImage: 'luna-mini.jpg',
-  backstory: 'Luna is the top strategist of Celestial Mage Collegium. She reads star charts before every match and genuinely believes the universe has already decided the winner.',
-  relationships: {
-    'queen': 'Luna still considers Mira her greatest "what if"—a rival who chose faith over astrology.'
-  },
+    portraitImage: 'luna-portrait.jpg',
+    miniImage: 'luna-mini.jpg',
+    backstory:
+      'Luna is the top strategist of Celestial Mage Collegium. She reads star charts before every match and genuinely believes the universe has already decided the winner.',
+    relationships: {
+      queen:
+        'Luna still considers Mira her greatest "what if"—a rival who chose faith over astrology.',
+    },
     icon: '🔮',
   },
   {
@@ -404,9 +421,10 @@ export const PIECE_DEFINITIONS: PieceDefinition[] = [
     personality: 'Noble guardian who shields allies with radiant wings.',
     flavorQuote: '"Stand behind me. No one falls today."',
 
-  portraitImage: 'valkyrie-paladin-portrait.jpg',
-  miniImage: 'valkyrie-paladin-mini.jpg',
-  backstory: 'A defender from Celestial Mage Collegium who transferred mid-season to "protect someone worth protecting." She refuses to say who.',
+    portraitImage: 'valkyrie-paladin-portrait.jpg',
+    miniImage: 'valkyrie-paladin-mini.jpg',
+    backstory:
+      'A defender from Celestial Mage Collegium who transferred mid-season to "protect someone worth protecting." She refuses to say who.',
     icon: '🛡️',
   },
   {
@@ -424,14 +442,15 @@ export const PIECE_DEFINITIONS: PieceDefinition[] = [
       uses: 2,
     },
     personality: 'Mischievous fox spirit who swaps places just for fun.',
-    flavorQuote: '"Now I\'m here, now I\'m there—bet you can\'t keep up!"',
+    flavorQuote: "\"Now I'm here, now I'm there—bet you can't keep up!\"",
 
-  portraitImage: 'yuki-portrait.jpg',
-  miniImage: 'yuki-mini.jpg',
-  backstory: 'Yuki is Kitsune Illusion Academy\'s star trickster. She flirts with opponents to unsettle them, but her grin slips whenever someone sees through an illusion cleanly.',
-  relationships: {
-    'king': 'Yuki calls Hana "prayer-chan" and claims it\'s just teasing. It might be more.'
-  },
+    portraitImage: 'yuki-portrait.jpg',
+    miniImage: 'yuki-mini.jpg',
+    backstory:
+      "Yuki is Kitsune Illusion Academy's star trickster. She flirts with opponents to unsettle them, but her grin slips whenever someone sees through an illusion cleanly.",
+    relationships: {
+      king: 'Yuki calls Hana "prayer-chan" and claims it\'s just teasing. It might be more.',
+    },
     icon: '🦊',
   },
   {
@@ -449,12 +468,13 @@ export const PIECE_DEFINITIONS: PieceDefinition[] = [
     personality: 'Honor-bound warrior who dashes through lines in a flash.',
     flavorQuote: '"My rook line is the path of thunder."',
 
-  portraitImage: 'ren-portrait.jpg',
-  miniImage: 'ren-mini.jpg',
-  backstory: 'Ren is Thunder Samurai Institute\'s ace and loudest voice. He values honor above all else, which makes his growing crush on a prayer-school captain extremely inconvenient.',
-  relationships: {
-    'king': 'Ren respects Hana\'s calm under pressure and keeps inventing excuses to face her in practice matches.'
-  },
+    portraitImage: 'ren-portrait.jpg',
+    miniImage: 'ren-mini.jpg',
+    backstory:
+      "Ren is Thunder Samurai Institute's ace and loudest voice. He values honor above all else, which makes his growing crush on a prayer-school captain extremely inconvenient.",
+    relationships: {
+      king: "Ren respects Hana's calm under pressure and keeps inventing excuses to face her in practice matches.",
+    },
     icon: '⚔️',
   },
   {
@@ -471,9 +491,10 @@ export const PIECE_DEFINITIONS: PieceDefinition[] = [
     personality: 'Sweet-toothed sorceress who leaves sticky traps everywhere.',
     flavorQuote: '"Try to move through this. It\'s sugar-free… but deadly."',
 
-  portraitImage: 'candy-portrait.jpg',
-  miniImage: 'candy-mini.jpg',
-  backstory: 'Candy is the captain of Candy Forest Prep\'s "Confectionery Combat Club." She decorates the board like a dessert and traps like a spider with a sweet tooth.',
+    portraitImage: 'candy-portrait.jpg',
+    miniImage: 'candy-mini.jpg',
+    backstory:
+      'Candy is the captain of Candy Forest Prep\'s "Confectionery Combat Club." She decorates the board like a dessert and traps like a spider with a sweet tooth.',
     icon: '🍬',
   },
   {
@@ -510,9 +531,10 @@ export const PIECE_DEFINITIONS: PieceDefinition[] = [
     personality: 'Calm ranger who never misses a diagonal shot.',
     flavorQuote: '"I see the opening. Arrow away."',
 
-  portraitImage: 'forest-archer-portrait.jpg',
-  miniImage: 'forest-archer-mini.jpg',
-  backstory: 'A calm ranger from the countryside who joined the tournament to prove that patience beats flash. She never raises her voice, even when winning.',
+    portraitImage: 'forest-archer-portrait.jpg',
+    miniImage: 'forest-archer-mini.jpg',
+    backstory:
+      'A calm ranger from the countryside who joined the tournament to prove that patience beats flash. She never raises her voice, even when winning.',
     icon: '🏹',
   },
   {
@@ -806,9 +828,10 @@ export const PIECE_DEFINITIONS: PieceDefinition[] = [
     personality: 'Charismatic idol whose charm makes enemies skip their turn.',
     flavorQuote: '"Everybody freeze for my chorus!"',
 
-  portraitImage: 'pop-star-portrait.jpg',
-  miniImage: 'pop-star-mini.jpg',
-  backstory: 'A chart-topping school idol who treats every match as a live performance. Her charm skill can literally make opposing pieces skip a turn.',
+    portraitImage: 'pop-star-portrait.jpg',
+    miniImage: 'pop-star-mini.jpg',
+    backstory:
+      'A chart-topping school idol who treats every match as a live performance. Her charm skill can literally make opposing pieces skip a turn.',
     icon: '🎤',
   },
 
@@ -828,9 +851,10 @@ export const PIECE_DEFINITIONS: PieceDefinition[] = [
     personality: 'Timeless student-council president who can rewind fate itself once per run.',
     flavorQuote: '"Let\'s redo that. I refuse to accept this outcome."',
 
-  portraitImage: 'eternal-queen-portrait.jpg',
-  miniImage: 'eternal-queen-mini.jpg',
-  backstory: 'The student council president of an elite academy, rumored to have once rewound an entire match to save a friend. No one can prove it.',
+    portraitImage: 'eternal-queen-portrait.jpg',
+    miniImage: 'eternal-queen-mini.jpg',
+    backstory:
+      'The student council president of an elite academy, rumored to have once rewound an entire match to save a friend. No one can prove it.',
     icon: '👑',
   },
   {
@@ -847,9 +871,10 @@ export const PIECE_DEFINITIONS: PieceDefinition[] = [
     personality: 'Grim harvester who grows stronger as allies fall.',
     flavorQuote: '"The moon rises… and so does my power."',
 
-  portraitImage: 'moonlight-reaper-portrait.jpg',
-  miniImage: 'moonlight-reaper-mini.jpg',
-  backstory: 'A lone striker who grows stronger as allies fall. Some say she\'s cursed; she says she\'s just used to being the last one standing.',
+    portraitImage: 'moonlight-reaper-portrait.jpg',
+    miniImage: 'moonlight-reaper-mini.jpg',
+    backstory:
+      "A lone striker who grows stronger as allies fall. Some say she's cursed; she says she's just used to being the last one standing.",
     icon: '💀',
   },
   {
@@ -886,9 +911,10 @@ export const PIECE_DEFINITIONS: PieceDefinition[] = [
     personality: 'Aloof royalty who banishes enemies into the void.',
     flavorQuote: '"You\'re not worth my time. Banish."',
 
-  portraitImage: 'void-princess-portrait.jpg',
-  miniImage: 'void-princess-mini.jpg',
-  backstory: 'Aloof royalty from Final Boss Throne Academy who can banish pieces from the board. She finds most opponents "not worth the void."',
+    portraitImage: 'void-princess-portrait.jpg',
+    miniImage: 'void-princess-mini.jpg',
+    backstory:
+      'Aloof royalty from Final Boss Throne Academy who can banish pieces from the board. She finds most opponents "not worth the void."',
     icon: '🌑',
   },
   {
@@ -991,12 +1017,13 @@ export const PIECE_DEFINITIONS: PieceDefinition[] = [
     personality: 'Volatile tyrant who trades safety for overwhelming power.',
     flavorQuote: '"A little blood for a lot of board? Worth it."',
 
-  portraitImage: 'victoria-portrait.jpg',
-  miniImage: 'victoria-mini.jpg',
-  backstory: 'Victoria is the reigning national champion and final boss of the tournament. Three years ago she was a prayer-school hopeful like Hana, before disappointment burned every softness away.',
-  relationships: {
-    'king': 'Victoria sees too much of her younger self in Hana and hates her for it.'
-  },
+    portraitImage: 'victoria-portrait.jpg',
+    miniImage: 'victoria-mini.jpg',
+    backstory:
+      'Victoria is the reigning national champion and final boss of the tournament. Three years ago she was a prayer-school hopeful like Hana, before disappointment burned every softness away.',
+    relationships: {
+      king: 'Victoria sees too much of her younger self in Hana and hates her for it.',
+    },
     icon: '👿',
   },
   {
@@ -1083,12 +1110,13 @@ export const PIECE_DEFINITIONS: PieceDefinition[] = [
     personality: 'The reigning champion captain: dramatic, powerful, and loves monologues.',
     flavorQuote: '"You dare challenge the throne? Cute."',
 
-  portraitImage: 'kira-portrait.jpg',
-  miniImage: 'kira-mini.jpg',
-  backstory: 'Kira captains Yami no Gakuen and serves as the tournament\'s opening gatekeeper. She was Hana\'s closest friend until a single tournament slot drove them apart.',
-  relationships: {
-    'king': 'Kira wants Hana to suffer almost as much as she wants Hana to prove her wrong.'
-  },
+    portraitImage: 'kira-portrait.jpg',
+    miniImage: 'kira-mini.jpg',
+    backstory:
+      "Kira captains Yami no Gakuen and serves as the tournament's opening gatekeeper. She was Hana's closest friend until a single tournament slot drove them apart.",
+    relationships: {
+      king: 'Kira wants Hana to suffer almost as much as she wants Hana to prove her wrong.',
+    },
     icon: '👾',
   },
 
@@ -1104,14 +1132,18 @@ export const PIECE_DEFINITIONS: PieceDefinition[] = [
     personality: 'Nervous club president; the whole match ends if he falls.',
     flavorQuote: '"P-please protect me, everyone!"',
 
-  portraitImage: 'hana-portrait.jpg',
-  miniImage: 'hana-mini.jpg',
-  backstory: 'Hana is the soft-spoken captain of Alishan Academy\'s chess club. She was never the strongest player, but her ability to keep the team calm under pressure turned a group of misfits into regional contenders.',
-  relationships: {
-    'queen': 'Mira is Hana\'s vice-captain and the only person allowed to tease her about her terrible opening theory.',
-    'final-boss-queen': 'Kira was Hana\'s childhood best friend before a falling-out over a tournament slot. Their reunion is equal parts bitter and heartbreaking.',
-    'thunder-samurai': 'Ren keeps challenging Hana to unofficial blitz matches. She suspects he\'s flirting; he insists it\'s "respect."'
-  },
+    portraitImage: 'hana-portrait.jpg',
+    miniImage: 'hana-mini.jpg',
+    backstory:
+      "Hana is the soft-spoken captain of Alishan Academy's chess club. She was never the strongest player, but her ability to keep the team calm under pressure turned a group of misfits into regional contenders.",
+    relationships: {
+      queen:
+        "Mira is Hana's vice-captain and the only person allowed to tease her about her terrible opening theory.",
+      'final-boss-queen':
+        "Kira was Hana's childhood best friend before a falling-out over a tournament slot. Their reunion is equal parts bitter and heartbreaking.",
+      'thunder-samurai':
+        'Ren keeps challenging Hana to unofficial blitz matches. She suspects he\'s flirting; he insists it\'s "respect."',
+    },
     icon: '🤴',
   },
   {
@@ -1123,13 +1155,15 @@ export const PIECE_DEFINITIONS: PieceDefinition[] = [
     personality: 'Regal ace who commands the board with effortless grace.',
     flavorQuote: '"I don\'t need the spotlight. I am the spotlight."',
 
-  portraitImage: 'mira-portrait.jpg',
-  miniImage: 'mira-mini.jpg',
-  backstory: 'Mira is Alishan\'s tactical prodigy—a scholarship student from a rival district who transferred in after losing to Hana in a middle-school qualifier. She claims she stayed for the free chapel lunches.',
-  relationships: {
-    'king': 'Mira respects Hana\'s leadership more than she admits, and quietly rewrites every opening to suit her captain\'s style.',
-    'celestial-mage': 'Luna once offered Mira a spot at Celestial Mage Collegium. Mira declined, but the offer still haunts her on bad nights.'
-  },
+    portraitImage: 'mira-portrait.jpg',
+    miniImage: 'mira-mini.jpg',
+    backstory:
+      "Mira is Alishan's tactical prodigy—a scholarship student from a rival district who transferred in after losing to Hana in a middle-school qualifier. She claims she stayed for the free chapel lunches.",
+    relationships: {
+      king: "Mira respects Hana's leadership more than she admits, and quietly rewrites every opening to suit her captain's style.",
+      'celestial-mage':
+        'Luna once offered Mira a spot at Celestial Mage Collegium. Mira declined, but the offer still haunts her on bad nights.',
+    },
     icon: '👸',
   },
   {
@@ -1141,9 +1175,9 @@ export const PIECE_DEFINITIONS: PieceDefinition[] = [
     personality: 'Steadfast castle-club member who dominates straight lines.',
     flavorQuote: '"Straightforward and strong—that\'s my motto."',
 
-  portraitImage: 'rook-club-portrait.jpg',
-  miniImage: 'rook-mini.jpg',
-  backstory: 'A dependable club member who dominates straight lines and straight talk.',
+    portraitImage: 'rook-club-portrait.jpg',
+    miniImage: 'rook-mini.jpg',
+    backstory: 'A dependable club member who dominates straight lines and straight talk.',
     icon: '🏰',
   },
   {
@@ -1155,9 +1189,9 @@ export const PIECE_DEFINITIONS: PieceDefinition[] = [
     personality: 'Wise strategy-club veteran who strikes from afar on diagonals.',
     flavorQuote: '"Diagonals are just shortcuts to victory."',
 
-  portraitImage: 'bishop-club-portrait.jpg',
-  miniImage: 'bishop-mini.jpg',
-  backstory: 'A quiet strategist who prefers diagonal thinking and early-morning practice.',
+    portraitImage: 'bishop-club-portrait.jpg',
+    miniImage: 'bishop-mini.jpg',
+    backstory: 'A quiet strategist who prefers diagonal thinking and early-morning practice.',
     icon: '🧙',
   },
   {
@@ -1169,9 +1203,9 @@ export const PIECE_DEFINITIONS: PieceDefinition[] = [
     personality: 'Gallant charger who leaps over obstacles and asks questions later.',
     flavorQuote: '"Over the pawns, through the lines—charge!"',
 
-  portraitImage: 'knight-club-portrait.jpg',
-  miniImage: 'knight-mini.jpg',
-  backstory: 'The team\'s energetic charger who leaps over problems and asks questions later.',
+    portraitImage: 'knight-club-portrait.jpg',
+    miniImage: 'knight-mini.jpg',
+    backstory: "The team's energetic charger who leaps over problems and asks questions later.",
     icon: '🦄',
   },
   {
@@ -1184,9 +1218,9 @@ export const PIECE_DEFINITIONS: PieceDefinition[] = [
     personality: 'Humble first-year who dreams of promotion.',
     flavorQuote: '"One day I\'ll reach the far rank… you\'ll see!"',
 
-  portraitImage: 'pawn-club-portrait.jpg',
-  miniImage: 'pawn-mini.jpg',
-  backstory: 'A humble first-year who dreams of promotion and never misses cleanup duty.',
+    portraitImage: 'pawn-club-portrait.jpg',
+    miniImage: 'pawn-mini.jpg',
+    backstory: 'A humble first-year who dreams of promotion and never misses cleanup duty.',
     icon: '🧒',
   },
 ];
@@ -1232,7 +1266,11 @@ export function getDraftPool(stageIndex: number, playerArmy: string[]): PieceDef
   return candidates;
 }
 
-export function rollDraftOptions(stageIndex: number, playerArmy: string[], count = 3): PieceDefinition[] {
+export function rollDraftOptions(
+  stageIndex: number,
+  playerArmy: string[],
+  count = 3,
+): PieceDefinition[] {
   const pool = getDraftPool(stageIndex, playerArmy);
   if (pool.length === 0) return [];
   const shuffled = pool.toSorted(() => Math.random() - 0.5);

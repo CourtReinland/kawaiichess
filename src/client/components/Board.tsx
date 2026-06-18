@@ -11,7 +11,14 @@ interface BoardProps {
   theme?: string;
 }
 
-export function Board({ state, selectedPieceId, onSelectPiece, onMove, rotation = 0, theme }: BoardProps) {
+export function Board({
+  state,
+  selectedPieceId,
+  onSelectPiece,
+  onMove,
+  rotation = 0,
+  theme,
+}: BoardProps) {
   const tiles: Position[] = [];
   for (let y = state.height - 1; y >= 0; y--) {
     for (let x = 0; x < state.width; x++) {
@@ -84,9 +91,7 @@ export function Board({ state, selectedPieceId, onSelectPiece, onMove, rotation 
               role="button"
               aria-label={`Square ${String.fromCharCode(97 + pos.x)}${pos.y + 1}`}
             >
-              {piece && (
-                <CharacterMini piece={piece} rotation={-rotation} />
-              )}
+              {piece && <CharacterMini piece={piece} rotation={-rotation} />}
             </div>
           );
         })}

@@ -6,7 +6,8 @@ export const ACADEMY_DEFINITIONS: AcademyDefinition[] = [
     name: 'Alishan Academy',
     crestImage: 'alishan.jpg',
     uniformTheme: 'alishan',
-    flavorText: 'The prayer-clad underdogs of the national chess circuit, where faith and strategy walk hand in hand.',
+    flavorText:
+      'The prayer-clad underdogs of the national chess circuit, where faith and strategy walk hand in hand.',
     isPlayerSchool: true,
     backdropImage: 'alishan-backdrop.jpg',
   },
@@ -15,7 +16,8 @@ export const ACADEMY_DEFINITIONS: AcademyDefinition[] = [
     name: 'Yami no Gakuen',
     crestImage: 'yami-no-gakuen.jpg',
     uniformTheme: 'rival-dark',
-    flavorText: 'A gothic rival school that plays from the shadows and never smiles until checkmate.',
+    flavorText:
+      'A gothic rival school that plays from the shadows and never smiles until checkmate.',
     backdropImage: 'yami-no-gakuen-backdrop.jpg',
     introSceneId: 'intro-yami-no-gakuen',
     outroSceneId: 'outro-yami-no-gakuen',
@@ -45,7 +47,8 @@ export const ACADEMY_DEFINITIONS: AcademyDefinition[] = [
     name: 'Thunder Samurai Institute',
     crestImage: 'thunder-samurai-institute.jpg',
     uniformTheme: 'rival-dark',
-    flavorText: 'A disciplined dojo where every move is shouted like a kata and struck like lightning.',
+    flavorText:
+      'A disciplined dojo where every move is shouted like a kata and struck like lightning.',
     backdropImage: 'thunder-samurai-institute-backdrop.jpg',
     introSceneId: 'intro-thunder-samurai-institute',
     outroSceneId: 'outro-thunder-samurai-institute',

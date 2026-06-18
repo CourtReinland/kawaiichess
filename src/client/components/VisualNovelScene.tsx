@@ -51,7 +51,9 @@ export function VisualNovelScene({ scene, onDone }: VisualNovelSceneProps) {
   }
 
   const speakerName = currentLine.speaker;
-  const speakerDef = currentLine.speakerPieceId ? PIECE_BY_ID[currentLine.speakerPieceId] : undefined;
+  const speakerDef = currentLine.speakerPieceId
+    ? PIECE_BY_ID[currentLine.speakerPieceId]
+    : undefined;
   const portraitPath =
     currentLine.portraitImage ??
     (speakerDef?.portraitImage
@@ -72,14 +74,19 @@ export function VisualNovelScene({ scene, onDone }: VisualNovelSceneProps) {
       role="button"
       aria-label="Story scene"
     >
-      <button className="vn-skip" onClick={(e) => { e.stopPropagation(); onDone(); }} type="button">
+      <button
+        className="vn-skip"
+        onClick={(e) => {
+          e.stopPropagation();
+          onDone();
+        }}
+        type="button"
+      >
         Skip
       </button>
 
       <div className="vn-stage">
-        {leftPortrait && (
-          <img src={leftPortrait} alt={speakerName} className="vn-portrait left" />
-        )}
+        {leftPortrait && <img src={leftPortrait} alt={speakerName} className="vn-portrait left" />}
         {centerPortrait && (
           <img src={centerPortrait} alt={speakerName} className="vn-portrait center" />
         )}
@@ -92,7 +99,9 @@ export function VisualNovelScene({ scene, onDone }: VisualNovelSceneProps) {
         <div className="vn-speaker">{speakerName}</div>
         <div className="vn-text">{displayText}</div>
         {!isTyping && (
-          <div className="vn-advance-hint">{isLastLine ? 'Tap to continue' : 'Tap to continue'}</div>
+          <div className="vn-advance-hint">
+            {isLastLine ? 'Tap to continue' : 'Tap to continue'}
+          </div>
         )}
       </div>
     </div>

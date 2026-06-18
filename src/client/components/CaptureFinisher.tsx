@@ -43,7 +43,12 @@ export function CaptureFinisher({
 
   if (videoPath && !videoFailed) {
     return (
-      <div className="capture-finisher video" onClick={onDone} role="button" aria-label="Capture video">
+      <div
+        className="capture-finisher video"
+        onClick={onDone}
+        role="button"
+        aria-label="Capture video"
+      >
         <video ref={videoRef} src={videoPath} muted playsInline className="capture-video" />
         <div className="capture-video-skip">Tap to skip</div>
       </div>
@@ -51,7 +56,12 @@ export function CaptureFinisher({
   }
 
   return (
-    <div className={`capture-finisher anim-${scene.animation}`} onClick={onDone} role="button" aria-label="Finishing move">
+    <div
+      className={`capture-finisher anim-${scene.animation}`}
+      onClick={onDone}
+      role="button"
+      aria-label="Finishing move"
+    >
       <div className="finisher-bg" />
       <div className="finisher-impact" />
       <div className="finisher-arena">

@@ -24,7 +24,7 @@ const CAPTURE_LINES: Record<
     animation: 'crush',
   },
   cute: {
-    attacker: ['Boop!', 'Sorry-not-sorry!', 'You\'re out!'],
+    attacker: ['Boop!', 'Sorry-not-sorry!', "You're out!"],
     defender: ['Eeep!', 'How mean...'],
     animation: 'charm',
   },
@@ -50,7 +50,10 @@ function sceneStyleFor(def: PieceDefinition): keyof typeof CAPTURE_LINES {
   return 'default';
 }
 
-export function getCaptureScene(attacker: PieceDefinition, _defender: PieceDefinition): CaptureScene {
+export function getCaptureScene(
+  attacker: PieceDefinition,
+  _defender: PieceDefinition,
+): CaptureScene {
   const style = sceneStyleFor(attacker);
   const lines = CAPTURE_LINES[style];
   return {
@@ -62,15 +65,15 @@ export function getCaptureScene(attacker: PieceDefinition, _defender: PieceDefin
 
 const VICTORY_TAUNTS: string[] = [
   'Better luck next time!',
-  'That\'s how a kawaii champion does it!',
+  "That's how a kawaii champion does it!",
   'You never stood a chance!',
   'Victory is mine! 💖',
   'Thanks for the practice!',
 ];
 
 const DEFEAT_LINES: string[] = [
-  'I\'ll get stronger...',
-  'This can\'t be the end...',
+  "I'll get stronger...",
+  "This can't be the end...",
   'Nooo! My perfect strategy!',
   'Rewind... please?',
 ];
@@ -78,7 +81,10 @@ const DEFEAT_LINES: string[] = [
 const WINNER_BANNERS: string[] = ['WINNER', 'VICTORY', 'PERFECT', 'KAWAII CHAMP'];
 const LOSER_BANNERS: string[] = ['GAME OVER', 'DEFEATED', 'K.O.', 'TRY AGAIN'];
 
-export function getBattleEndScene(battle: BattleState, sideWon: 'player' | 'enemy'): BattleEndScene {
+export function getBattleEndScene(
+  battle: BattleState,
+  sideWon: 'player' | 'enemy',
+): BattleEndScene {
   const winnerRoyal = findRoyal(battle, sideWon);
   const loserRoyal = findRoyal(battle, sideWon === 'player' ? 'enemy' : 'player');
 

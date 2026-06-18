@@ -26,7 +26,15 @@ function positionKey(pos: Position): string {
   return `${pos.x},${pos.y}`;
 }
 
-export function DeploymentScreen({ pieces, onChange, onStart, stageName, opponentAcademy, playerAcademy, theme }: DeploymentScreenProps) {
+export function DeploymentScreen({
+  pieces,
+  onChange,
+  onStart,
+  stageName,
+  opponentAcademy,
+  playerAcademy,
+  theme,
+}: DeploymentScreenProps) {
   const [selectedPieceId, setSelectedPieceId] = useState<string | undefined>(undefined);
 
   const deployed = pieces.filter((p) => p.position);
@@ -42,7 +50,9 @@ export function DeploymentScreen({ pieces, onChange, onStart, stageName, opponen
     const selected = pieces.find((p) => p.id === selectedPieceId);
     if (!selected) return;
 
-    const occupant = deployed.find((p) => p.position && positionKey(p.position) === positionKey(pos));
+    const occupant = deployed.find(
+      (p) => p.position && positionKey(p.position) === positionKey(pos),
+    );
 
     const updated = pieces.map((p) => {
       if (p.id === selectedPieceId) {
@@ -109,24 +119,35 @@ export function DeploymentScreen({ pieces, onChange, onStart, stageName, opponen
       <h2>Match Formation 🎀</h2>
       <div className="academy-matchup">
         <div className="academy-matchup-side">
-          <img src={`/academies/${playerAcademy.crestImage}`} alt={playerAcademy.name} className="academy-crest" />
+          <img
+            src={`/academies/${playerAcademy.crestImage}`}
+            alt={playerAcademy.name}
+            className="academy-crest"
+          />
           <strong>{playerAcademy.name}</strong>
         </div>
         <span className="vs">VS</span>
         <div className="academy-matchup-side">
-          <img src={`/academies/${opponentAcademy.crestImage}`} alt={opponentAcademy.name} className="academy-crest" />
+          <img
+            src={`/academies/${opponentAcademy.crestImage}`}
+            alt={opponentAcademy.name}
+            className="academy-crest"
+          />
           <strong>{opponentAcademy.name}</strong>
         </div>
       </div>
       <p className="academy-flavor">{opponentAcademy.flavorText}</p>
       <p>
-        Arrange your club members for <strong>{stageName}</strong>. Tap a member, then tap a square to place them.
+        Arrange your club members for <strong>{stageName}</strong>. Tap a member, then tap a square
+        to place them.
       </p>
 
       <div className={`board-container ${themeClass}`}>
         <div className="chess-board">
           {tiles.map((pos) => {
-            const piece = deployed.find((p) => p.position && positionKey(p.position) === positionKey(pos));
+            const piece = deployed.find(
+              (p) => p.position && positionKey(p.position) === positionKey(pos),
+            );
             const light = (pos.x + pos.y) % 2 === 0;
             const isSelected = piece?.id === selectedPieceId;
             return (
@@ -182,7 +203,12 @@ export function DeploymentScreen({ pieces, onChange, onStart, stageName, opponen
         <button className="kawaii-button secondary" onClick={autoDeploy} type="button">
           Auto Deploy
         </button>
-        <button className="kawaii-button" onClick={onStart} disabled={bench.length > 0} type="button">
+        <button
+          className="kawaii-button"
+          onClick={onStart}
+          disabled={bench.length > 0}
+          type="button"
+        >
           Start Battle
         </button>
       </div>

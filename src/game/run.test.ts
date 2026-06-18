@@ -32,7 +32,6 @@ describe('run state', () => {
     vi.unstubAllGlobals();
   });
 
-
   it('creates a new run with a starting army and stages', () => {
     const run = createRunState();
     expect(run.playerArmy.length).toBeGreaterThan(0);

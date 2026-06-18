@@ -26,10 +26,7 @@ describe('enemy AI', () => {
   });
 
   it('returns undefined when no enemy pieces exist', () => {
-    let state = createBattleState(
-      [{ definitionId: 'king', position: { x: 4, y: 0 } }],
-      [],
-    );
+    let state = createBattleState([{ definitionId: 'king', position: { x: 4, y: 0 } }], []);
     state = switchTurn(state);
     const move = generateEnemyMove(state);
     expect(move).toBeUndefined();

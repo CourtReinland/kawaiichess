@@ -31,7 +31,9 @@ export function createMockProcess(
   return {
     status: status as Process['status'],
     exitCode,
-    getLogs: vi.fn<() => Promise<{ stdout: string; stderr: string }>>().mockResolvedValue({ stdout, stderr }),
+    getLogs: vi
+      .fn<() => Promise<{ stdout: string; stderr: string }>>()
+      .mockResolvedValue({ stdout, stderr }),
   };
 }
 
@@ -64,9 +66,13 @@ export function createMockSandbox(
     processes?: Partial<Process>[];
   } = {},
 ): MockSandbox {
-  const listProcessesMock = vi.fn<() => Promise<Partial<Process>[]>>().mockResolvedValue(options.processes || []);
+  const listProcessesMock = vi
+    .fn<() => Promise<Partial<Process>[]>>()
+    .mockResolvedValue(options.processes || []);
   const containerFetchMock = vi.fn<() => Promise<Response>>();
-  const startProcessMock = vi.fn<() => Promise<Partial<Process>>>().mockResolvedValue(createMockProcess());
+  const startProcessMock = vi
+    .fn<() => Promise<Partial<Process>>>()
+    .mockResolvedValue(createMockProcess());
   const execMock = vi.fn<() => Promise<ExecResult>>().mockResolvedValue(createMockExecResult());
   const writeFileMock = vi.fn<() => Promise<void>>().mockResolvedValue(undefined);
 

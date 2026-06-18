@@ -1,5 +1,13 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import type { BattleState, CaptureScene, Move, PieceDefinition, Position, RunState, StoryScene } from '../../game';
+import type {
+  BattleState,
+  CaptureScene,
+  Move,
+  PieceDefinition,
+  Position,
+  RunState,
+  StoryScene,
+} from '../../game';
 import {
   acceptDraft,
   advanceStage,
@@ -40,8 +48,8 @@ function StartScreen({ onNewRun, onContinue }: { onNewRun: () => void; onContinu
       <div className="start-content">
         <h2>Kawaii Chess Academy 🎀</h2>
         <p>
-          Lead Alishan Academy through the national inter-school chess tournament. Recruit club members,
-          outwit rival academies, and claim the championship throne!
+          Lead Alishan Academy through the national inter-school chess tournament. Recruit club
+          members, outwit rival academies, and claim the championship throne!
         </p>
         <div className="menu-buttons">
           <button className="kawaii-button" onClick={onNewRun} type="button">
@@ -152,10 +160,13 @@ export function RunScreen() {
     }
   }, []);
 
-  const playKiraTaunt = useCallback((stageIndex: number, then: Screen) => {
-    const sceneId = `kira-taunt-${stageIndex}`;
-    playStoryScene(sceneId, then);
-  }, [playStoryScene]);
+  const playKiraTaunt = useCallback(
+    (stageIndex: number, then: Screen) => {
+      const sceneId = `kira-taunt-${stageIndex}`;
+      playStoryScene(sceneId, then);
+    },
+    [playStoryScene],
+  );
 
   const handleStoryDone = useCallback(() => {
     setActiveStoryScene(undefined);
@@ -177,46 +188,49 @@ export function RunScreen() {
     }
   }, [nextScreenAfterStory, pendingIntroAcademyId, playStoryScene]);
 
-  const handleMatchEnd = useCallback((endedBattle?: BattleState) => {
-    const battleState = endedBattle ?? battle;
-    if (!battleState || !run || battleState.phase === 'battle') return;
+  const handleMatchEnd = useCallback(
+    (endedBattle?: BattleState) => {
+      const battleState = endedBattle ?? battle;
+      if (!battleState || !run || battleState.phase === 'battle') return;
 
-    const academy = getAcademy(run.stages[run.stageIndex].academyId);
+      const academy = getAcademy(run.stages[run.stageIndex].academyId);
 
-    if (battleState.phase === 'victory') {
-      const afterVictory = advanceStage(run);
-      setRun(afterVictory);
-      saveRun(afterVictory);
-      setBattle(undefined);
-      setSelectedPieceId('');
-      if (isRunComplete(afterVictory)) {
+      if (battleState.phase === 'victory') {
+        const afterVictory = advanceStage(run);
+        setRun(afterVictory);
+        saveRun(afterVictory);
+        setBattle(undefined);
+        setSelectedPieceId('');
+        if (isRunComplete(afterVictory)) {
+          clearSavedRun();
+          if (academy.outroSceneId) {
+            playStoryScene(`${academy.outroSceneId}-victory`, 'end');
+          } else {
+            setScreen('end');
+          }
+          return;
+        }
+        if (academy.outroSceneId) {
+          playStoryScene(`${academy.outroSceneId}-victory`, 'map');
+        } else {
+          setScreen('map');
+        }
+      } else if (battleState.phase === 'defeat') {
+        const afterDefeat = recordDefeat(run);
+        setRun(afterDefeat);
+        saveRun(afterDefeat);
+        setBattle(undefined);
+        setSelectedPieceId('');
         clearSavedRun();
         if (academy.outroSceneId) {
-          playStoryScene(`${academy.outroSceneId}-victory`, 'end');
+          playStoryScene(`${academy.outroSceneId}-defeat`, 'end');
         } else {
           setScreen('end');
         }
-        return;
       }
-      if (academy.outroSceneId) {
-        playStoryScene(`${academy.outroSceneId}-victory`, 'map');
-      } else {
-        setScreen('map');
-      }
-    } else if (battleState.phase === 'defeat') {
-      const afterDefeat = recordDefeat(run);
-      setRun(afterDefeat);
-      saveRun(afterDefeat);
-      setBattle(undefined);
-      setSelectedPieceId('');
-      clearSavedRun();
-      if (academy.outroSceneId) {
-        playStoryScene(`${academy.outroSceneId}-defeat`, 'end');
-      } else {
-        setScreen('end');
-      }
-    }
-  }, [battle, run, playStoryScene]);
+    },
+    [battle, run, playStoryScene],
+  );
 
   const handleMapSelect = useCallback(
     (matchIndex: number) => {
@@ -316,7 +330,11 @@ export function RunScreen() {
 
   // Enemy turn handler.
   useEffect(() => {
-    if (!battleRef.current || battleRef.current.turn !== 'enemy' || battleRef.current.phase !== 'battle') {
+    if (
+      !battleRef.current ||
+      battleRef.current.turn !== 'enemy' ||
+      battleRef.current.phase !== 'battle'
+    ) {
       return undefined;
     }
     if (captureScene) return undefined;
@@ -329,7 +347,11 @@ export function RunScreen() {
         if (enemyMove === null) {
           // Enemy has no legal moves: stalemate counts as a forfeit/victory for the player.
           if (!hasAnyValidMoves(prev, 'enemy')) {
-            const stalemated = { ...prev, phase: 'victory' as const, log: [...prev.log, 'Rival team has no moves and forfeits!'] };
+            const stalemated = {
+              ...prev,
+              phase: 'victory' as const,
+              log: [...prev.log, 'Rival team has no moves and forfeits!'],
+            };
             setTimeout(() => handleMatchEnd(stalemated), 0);
             return stalemated;
           }
@@ -369,7 +391,15 @@ export function RunScreen() {
         enemyTimerRef.current = undefined;
       }
     };
-  }, [battle?.turn, battle?.phase, battle?.pieces.length, captureScene, run?.stageIndex, run?.stages, handleMatchEnd]);
+  }, [
+    battle?.turn,
+    battle?.phase,
+    battle?.pieces.length,
+    captureScene,
+    run?.stageIndex,
+    run?.stages,
+    handleMatchEnd,
+  ]);
 
   const handleDraftSelect = useCallback(
     (pieceId: string) => {
@@ -428,11 +458,7 @@ export function RunScreen() {
 
   const playerAcademy = useMemo(() => getAcademy(PLAYER_ACADEMY_ID), []);
 
-  const turnText = battle
-    ? battle.turn === 'player'
-      ? 'Your turn ✨'
-      : 'Enemy turn 👾'
-    : '';
+  const turnText = battle ? (battle.turn === 'player' ? 'Your turn ✨' : 'Enemy turn 👾') : '';
 
   const selectedPieceInfo = useMemo(() => {
     if (!battle || !selectedPieceId) return undefined;
@@ -507,7 +533,9 @@ export function RunScreen() {
               <span>{currentAcademy.flavorText}</span>
             </div>
           </div>
-          <div className={`turn-indicator ${battle.turn}`}>{currentStageName} — {turnText}</div>
+          <div className={`turn-indicator ${battle.turn}`}>
+            {currentStageName} — {turnText}
+          </div>
           <Board3D
             state={battle}
             selectedPieceId={selectedPieceId}
@@ -531,11 +559,7 @@ export function RunScreen() {
             >
               Rotate Board
             </button>
-            <button
-              className="kawaii-button secondary"
-              onClick={handleRewind}
-              type="button"
-            >
+            <button className="kawaii-button secondary" onClick={handleRewind} type="button">
               Rewind Run
             </button>
           </div>
@@ -552,8 +576,7 @@ export function RunScreen() {
                 </div>
               </div>
               <p className="piece-info-movement">
-                <strong>Moves:</strong>{' '}
-                {selectedPieceInfo.def.movement}
+                <strong>Moves:</strong> {selectedPieceInfo.def.movement}
                 {selectedPieceInfo.def.range ? ` (range ${selectedPieceInfo.def.range})` : ''}
                 {selectedPieceInfo.def.canJump ? ' • jumps pieces' : ''}
               </p>
@@ -596,28 +619,35 @@ export function RunScreen() {
         </>
       )}
 
-      {captureScene && pendingMove && battle && (() => {
-        const attacker = battle.pieces.find((p) => p.id === pendingMove.pieceId)!;
-        const defender = pendingMove.capture!;
-        const attackerDef = getDefinition(attacker);
-        const defenderDef = getDefinition(defender);
-        return (
-          <CaptureFinisher
-            scene={captureScene}
-            attackerIcon={attackerDef.icon}
-            attackerName={attackerDef.name}
-            defenderIcon={defenderDef.icon}
-            defenderName={defenderDef.name}
-            attackerPortrait={getPiecePortrait(attacker.definitionId)}
-            defenderPortrait={getPiecePortrait(defender.definitionId)}
-            videoPath={`/videos/captures/${attackerDef.id}-captures-${defenderDef.id}.mp4`}
-            onDone={handleCutsceneDone}
-          />
-        );
-      })()}
+      {captureScene &&
+        pendingMove &&
+        battle &&
+        (() => {
+          const attacker = battle.pieces.find((p) => p.id === pendingMove.pieceId)!;
+          const defender = pendingMove.capture!;
+          const attackerDef = getDefinition(attacker);
+          const defenderDef = getDefinition(defender);
+          return (
+            <CaptureFinisher
+              scene={captureScene}
+              attackerIcon={attackerDef.icon}
+              attackerName={attackerDef.name}
+              defenderIcon={defenderDef.icon}
+              defenderName={defenderDef.name}
+              attackerPortrait={getPiecePortrait(attacker.definitionId)}
+              defenderPortrait={getPiecePortrait(defender.definitionId)}
+              videoPath={`/videos/captures/${attackerDef.id}-captures-${defenderDef.id}.mp4`}
+              onDone={handleCutsceneDone}
+            />
+          );
+        })()}
 
       {screen === 'end' && (
-        <EndScreen run={run} isVictory={runComplete || run.victories >= run.stages.length} onRewind={handleRewind} />
+        <EndScreen
+          run={run}
+          isVictory={runComplete || run.victories >= run.stages.length}
+          onRewind={handleRewind}
+        />
       )}
     </div>
   );

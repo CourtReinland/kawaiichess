@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { PIECE_BY_ID, PIECE_DEFINITIONS, getDraftPool, getUnlockedTiers, rollDraftOptions } from './pieces';
+import {
+  PIECE_BY_ID,
+  PIECE_DEFINITIONS,
+  getDraftPool,
+  getUnlockedTiers,
+  rollDraftOptions,
+} from './pieces';
 
 describe('piece definitions', () => {
   it('contains 55+ design-doc pieces plus standard pieces', () => {

@@ -52,11 +52,9 @@ interface CharacterMiniProps {
 
 export function CharacterMini({ piece, definition, side, rotation = 0 }: CharacterMiniProps) {
   const def = piece ? getDefinition(piece) : definition;
-  const miniSide = piece ? piece.side : side ?? 'player';
+  const miniSide = piece ? piece.side : (side ?? 'player');
   if (!def) return null;
-  const miniPath = def.miniImage
-    ? `/characters/minis/${def.miniImage}`
-    : undefined;
+  const miniPath = def.miniImage ? `/characters/minis/${def.miniImage}` : undefined;
 
   return (
     <span
@@ -73,7 +71,10 @@ export function CharacterMini({ piece, definition, side, rotation = 0 }: Charact
   );
 }
 
-export function getSpeakerPortrait(speakerPieceId?: string, mood?: CharacterPortraitProps['mood']): string | undefined {
+export function getSpeakerPortrait(
+  speakerPieceId?: string,
+  mood?: CharacterPortraitProps['mood'],
+): string | undefined {
   if (!speakerPieceId) return undefined;
   const def = PIECE_BY_ID[speakerPieceId];
   if (!def) return undefined;

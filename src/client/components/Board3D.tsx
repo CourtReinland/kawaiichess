@@ -1,6 +1,15 @@
-import { useRef, useMemo, Suspense, useCallback, useEffect, useState, Component, type ReactNode } from 'react';
+import {
+  useRef,
+  useMemo,
+  Suspense,
+  useCallback,
+  useEffect,
+  useState,
+  Component,
+  type ReactNode,
+} from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { OrbitControls, useTexture } from '@react-three/drei';
+import { OrbitControls, RoundedBox, useTexture } from '@react-three/drei';
 import * as THREE from 'three';
 import type { BattleState, Move, PieceInstance, Position } from '../../game';
 import { getDefinition, positionsEqual } from '../../game/board';
@@ -18,8 +27,11 @@ interface Board3DProps {
 const BOARD_SIZE = 8;
 const HALF = BOARD_SIZE / 2;
 const TILE_TOP_Y = 0;
-const TILE_TEXTURE_INSET = 0.105;
-const TILE_TEXTURE_REPEAT = 0.79;
+const BOARD_MESH_SIZE = 9.2;
+const BOARD_MARGIN = (BOARD_MESH_SIZE - BOARD_SIZE) / 2;
+const BOARD_THICKNESS = 0.12;
+const TILE_TEXTURE_OFFSET = BOARD_MARGIN / BOARD_MESH_SIZE;
+const TILE_TEXTURE_REPEAT = BOARD_SIZE / BOARD_MESH_SIZE;
 
 function supportsWebGL(): boolean {
   try {
@@ -59,25 +71,103 @@ function useBoardTexture(theme?: string): THREE.Texture | null {
 
 function BaseBoard({ theme }: { theme?: string }) {
   const texture = useBoardTexture(theme);
-  const sideMat = useMemo(() => new THREE.MeshStandardMaterial({ color: '#5a4a52', roughness: 0.6 }), []);
+  const sideMat = useMemo(
+    () =>
+      new THREE.MeshStandardMaterial({
+        color: '#4a3b42',
+        roughness: 0.55,
+        metalness: 0.1,
+      }),
+    [],
+  );
   const topMat = useMemo(() => {
     if (!texture) return new THREE.MeshStandardMaterial({ color: '#fff0f5' });
-    texture.offset.set(TILE_TEXTURE_INSET, TILE_TEXTURE_INSET);
+    texture.offset.set(TILE_TEXTURE_OFFSET, TILE_TEXTURE_OFFSET);
     texture.repeat.set(TILE_TEXTURE_REPEAT, TILE_TEXTURE_REPEAT);
-    return new THREE.MeshStandardMaterial({ map: texture, roughness: 0.6, metalness: 0.05 });
+    return new THREE.MeshStandardMaterial({
+      map: texture,
+      roughness: 0.6,
+      metalness: 0.05,
+    });
   }, [texture]);
   const materials = useMemo(
     () => [sideMat, sideMat, topMat, sideMat, sideMat, sideMat],
     [sideMat, topMat],
   );
 
+  const frameMat = useMemo(
+    () => new THREE.MeshStandardMaterial({ color: '#3e2f36', roughness: 0.5, metalness: 0.15 }),
+    [],
+  );
+  const legMat = useMemo(
+    () => new THREE.MeshStandardMaterial({ color: '#2e2228', roughness: 0.6, metalness: 0.1 }),
+    [],
+  );
+
+  const half = BOARD_MESH_SIZE / 2;
+  const frameCenter = half - BOARD_MARGIN / 2; // distance from center to frame midline
+  const frameDepth = BOARD_MARGIN;
+  const frameHeight = 0.18;
+  const frameY = BOARD_THICKNESS / 2 + frameHeight / 2;
+
   return (
-    <mesh receiveShadow castShadow position={[0, -0.04, 0]}>
-      <boxGeometry args={[BOARD_SIZE, 0.08, BOARD_SIZE]} />
-      {materials.map((mat, i) => (
-        <primitive key={mat.uuid} object={mat} attach={`material-${i}`} />
+    <group>
+      {/* ground/table plane */}
+      <mesh
+        receiveShadow
+        position={[0, -BOARD_THICKNESS - 0.02, 0]}
+        rotation={[-Math.PI / 2, 0, 0]}
+      >
+        <planeGeometry args={[16, 16]} />
+        <meshStandardMaterial color="#f8e1e7" roughness={0.9} />
+      </mesh>
+
+      {/* main board slab */}
+      <mesh receiveShadow castShadow position={[0, 0, 0]}>
+        <boxGeometry args={[BOARD_MESH_SIZE, BOARD_THICKNESS, BOARD_MESH_SIZE]} />
+        {materials.map((mat, i) => (
+          <primitive key={mat.uuid} object={mat} attach={`material-${i}`} />
+        ))}
+      </mesh>
+
+      {/* raised frame rails */}
+      <mesh castShadow receiveShadow position={[0, frameY, -frameCenter]} material={frameMat}>
+        <boxGeometry args={[BOARD_MESH_SIZE, frameHeight, frameDepth]} />
+      </mesh>
+      <mesh castShadow receiveShadow position={[0, frameY, frameCenter]} material={frameMat}>
+        <boxGeometry args={[BOARD_MESH_SIZE, frameHeight, frameDepth]} />
+      </mesh>
+      <mesh castShadow receiveShadow position={[-frameCenter, frameY, 0]} material={frameMat}>
+        <boxGeometry args={[frameDepth, frameHeight, BOARD_SIZE]} />
+      </mesh>
+      <mesh castShadow receiveShadow position={[frameCenter, frameY, 0]} material={frameMat}>
+        <boxGeometry args={[frameDepth, frameHeight, BOARD_SIZE]} />
+      </mesh>
+
+      {/* corner posts */}
+      {[
+        [-frameCenter, -frameCenter],
+        [frameCenter, -frameCenter],
+        [-frameCenter, frameCenter],
+        [frameCenter, frameCenter],
+      ].map(([x, z], i) => (
+        <mesh key={i} castShadow receiveShadow position={[x, frameY, z]} material={frameMat}>
+          <boxGeometry args={[frameDepth, frameHeight, frameDepth]} />
+        </mesh>
       ))}
-    </mesh>
+
+      {/* little feet */}
+      {[
+        [-half + 0.2, -half + 0.2],
+        [half - 0.2, -half + 0.2],
+        [-half + 0.2, half - 0.2],
+        [half - 0.2, half - 0.2],
+      ].map(([x, z], i) => (
+        <mesh key={i} castShadow position={[x, -BOARD_THICKNESS / 2 - 0.08, z]} material={legMat}>
+          <boxGeometry args={[0.35, 0.16, 0.35]} />
+        </mesh>
+      ))}
+    </group>
   );
 }
 
@@ -101,29 +191,58 @@ function TileHighlight({
   const world = useMemo(() => posToWorld(pos), [pos]);
 
   return (
-    <group position={world} onClick={(e) => { e.stopPropagation(); onClick(pos); }}>
+    <group
+      position={world}
+      onClick={(e) => {
+        e.stopPropagation();
+        onClick(pos);
+      }}
+    >
       {selected && (
         <mesh position={[0, TILE_TOP_Y + 0.005, 0]} rotation={[-Math.PI / 2, 0, 0]}>
           <planeGeometry args={[0.92, 0.92]} />
-          <meshStandardMaterial color="#90ee90" transparent opacity={0.5} emissive="#90ee90" emissiveIntensity={0.3} depthWrite={false} />
+          <meshStandardMaterial
+            color="#90ee90"
+            transparent
+            opacity={0.5}
+            emissive="#90ee90"
+            emissiveIntensity={0.3}
+            depthWrite={false}
+          />
         </mesh>
       )}
       {validMove && !validCapture && (
         <mesh position={[0, TILE_TOP_Y + 0.03, 0]}>
           <cylinderGeometry args={[0.18, 0.18, 0.04, 32]} />
-          <meshStandardMaterial color="#90ee90" emissive="#90ee90" emissiveIntensity={0.5} transparent opacity={0.85} />
+          <meshStandardMaterial
+            color="#90ee90"
+            emissive="#90ee90"
+            emissiveIntensity={0.5}
+            transparent
+            opacity={0.85}
+          />
         </mesh>
       )}
       {(validCapture || enemyCapture) && (
         <mesh position={[0, TILE_TOP_Y + 0.03, 0]}>
           <torusGeometry args={[0.32, 0.06, 16, 32]} />
-          <meshStandardMaterial color={enemyCapture ? '#ff1493' : '#ff6b6b'} emissive={enemyCapture ? '#ff1493' : '#ff6b6b'} emissiveIntensity={0.5} />
+          <meshStandardMaterial
+            color={enemyCapture ? '#ff1493' : '#ff6b6b'}
+            emissive={enemyCapture ? '#ff1493' : '#ff6b6b'}
+            emissiveIntensity={0.5}
+          />
         </mesh>
       )}
       {enemyRange && !enemyCapture && (
         <mesh position={[0, TILE_TOP_Y + 0.03, 0]}>
           <cylinderGeometry args={[0.15, 0.15, 0.04, 32]} />
-          <meshStandardMaterial color="#ff69b4" emissive="#ff69b4" emissiveIntensity={0.4} transparent opacity={0.7} />
+          <meshStandardMaterial
+            color="#ff69b4"
+            emissive="#ff69b4"
+            emissiveIntensity={0.4}
+            transparent
+            opacity={0.7}
+          />
         </mesh>
       )}
     </group>
@@ -163,11 +282,11 @@ function removeWhiteBackground(source: THREE.Texture): THREE.CanvasTexture {
   return tex;
 }
 
-const CARD_WIDTH = 0.5;
-const CARD_HEIGHT = 0.7;
-const CARD_DEPTH = 0.05;
-const BASE_CENTER_Y = TILE_TOP_Y + 0.03;
-const CARD_Y = TILE_TOP_Y + 0.06 + CARD_HEIGHT / 2;
+const CARD_WIDTH = 0.55;
+const CARD_HEIGHT = 0.75;
+const CARD_DEPTH = 0.08;
+const BASE_CENTER_Y = TILE_TOP_Y + 0.04;
+const CARD_Y = TILE_TOP_Y + 0.08 + CARD_HEIGHT / 2;
 
 function Piece3D({
   piece,
@@ -188,7 +307,11 @@ function Piece3D({
     const t = Array.isArray(tex) ? tex[0] : tex;
     t.colorSpace = THREE.SRGBColorSpace;
   });
-  const safeSource = miniPath ? (Array.isArray(sourceTexture) ? sourceTexture[0] : sourceTexture) : null;
+  const safeSource = miniPath
+    ? Array.isArray(sourceTexture)
+      ? sourceTexture[0]
+      : sourceTexture
+    : null;
 
   const portraitTexture = useMemo(() => {
     if (!safeSource) return null;
@@ -196,43 +319,48 @@ function Piece3D({
   }, [safeSource]);
 
   const groupRef = useRef<THREE.Group>(null);
-  const cardRef = useRef<THREE.Mesh>(null);
+  const cardRef = useRef<THREE.Group>(null);
   const target = useMemo(() => posToWorld(piece.position), [piece.position]);
 
   const sideColor = piece.side === 'player' ? '#a2d2ff' : '#ff9aa2';
   const royalColor = piece.side === 'player' ? '#ffd700' : '#ff4d6d';
+  const accentColor = def.isRoyal ? royalColor : sideColor;
 
-  const sideMat = useMemo(
-    () => new THREE.MeshStandardMaterial({ color: def.isRoyal ? royalColor : sideColor, roughness: 0.5 }),
-    [def.isRoyal, royalColor, sideColor],
+  const frameMat = useMemo(
+    () =>
+      new THREE.MeshStandardMaterial({
+        color: accentColor,
+        roughness: 0.35,
+        metalness: 0.15,
+        emissive: accentColor,
+        emissiveIntensity: isSelected ? 0.25 : 0.05,
+      }),
+    [accentColor, isSelected],
   );
+
   const portraitMat = useMemo(() => {
     if (!portraitTexture) return null;
     return new THREE.MeshStandardMaterial({
       map: portraitTexture,
-      transparent: false,
+      transparent: true,
       alphaTest: 0.1,
       side: THREE.DoubleSide,
       roughness: 0.4,
       metalness: 0.05,
+      emissive: '#ffffff',
+      emissiveIntensity: 0.05,
     });
   }, [portraitTexture]);
-  const materials = useMemo(() => {
-    if (!portraitMat) return null;
-    return [sideMat, sideMat, sideMat, sideMat, portraitMat, portraitMat];
-  }, [sideMat, portraitMat]);
 
   useFrame((state, delta) => {
     if (!groupRef.current) return;
     groupRef.current.position.lerp(target, Math.min(1, delta * 12));
-    const scale = isSelected ? 1.1 : 1;
+    const scale = isSelected ? 1.12 : 1;
     groupRef.current.scale.lerp(new THREE.Vector3(scale, scale, scale), Math.min(1, delta * 12));
 
     if (cardRef.current) {
-      const localCam = state.camera.position.clone();
-      groupRef.current.worldToLocal(localCam);
-      localCam.y = CARD_Y;
-      cardRef.current.rotation.y = Math.atan2(localCam.x, localCam.z);
+      const cam = state.camera.position;
+      cardRef.current.lookAt(cam);
     }
   });
 
@@ -250,36 +378,50 @@ function Piece3D({
 
   return (
     <group ref={groupRef} position={target} onClick={handleClick}>
+      {/* base pedestal */}
       <mesh position={[0, BASE_CENTER_Y, 0]} castShadow receiveShadow>
-        <cylinderGeometry args={[0.34, 0.38, 0.06, 32]} />
-        <meshStandardMaterial color={def.isRoyal ? royalColor : sideColor} roughness={0.4} metalness={0.15} />
+        <cylinderGeometry args={[0.34, 0.38, 0.08, 32]} />
+        <meshStandardMaterial color={accentColor} roughness={0.35} metalness={0.2} />
       </mesh>
-      <mesh position={[0, TILE_TOP_Y + 0.012, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-        <ringGeometry args={[0.41, 0.47, 48]} />
-        <meshBasicMaterial color={sideColor} transparent opacity={0.55} depthWrite={false} />
+      {/* metallic rim */}
+      <mesh position={[0, BASE_CENTER_Y + 0.044, 0]} rotation={[Math.PI / 2, 0, 0]} castShadow>
+        <torusGeometry args={[0.36, 0.03, 12, 48]} />
+        <meshStandardMaterial color="#ffffff" roughness={0.2} metalness={0.6} />
       </mesh>
-      {materials ? (
-        <mesh ref={cardRef} position={[0, CARD_Y, 0]} castShadow receiveShadow>
-          <boxGeometry args={[CARD_WIDTH, CARD_HEIGHT, CARD_DEPTH]} />
-          {materials.map((mat, i) => (
-            <primitive key={mat.uuid} object={mat} attach={`material-${i}`} />
-          ))}
-        </mesh>
-      ) : (
-        <mesh ref={cardRef} position={[0, CARD_Y, 0]} castShadow>
-          <boxGeometry args={[CARD_WIDTH, CARD_HEIGHT, CARD_DEPTH]} />
-          <meshStandardMaterial color={sideColor} />
-        </mesh>
-      )}
-      {def.isRoyal && (
-        <mesh position={[0, CARD_Y + CARD_HEIGHT / 2 + 0.03, 0]} castShadow>
-          <torusGeometry args={[0.34, 0.025, 16, 48]} />
-          <meshStandardMaterial color="#ffffff" emissive="#ffffff" emissiveIntensity={0.3} />
-        </mesh>
-      )}
+      {/* ground ring */}
+      <mesh position={[0, TILE_TOP_Y + 0.008, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+        <ringGeometry args={[0.4, 0.46, 48]} />
+        <meshBasicMaterial color={accentColor} transparent opacity={0.5} depthWrite={false} />
+      </mesh>
+
+      {/* standee card */}
+      <group ref={cardRef} position={[0, CARD_Y, 0]}>
+        <RoundedBox
+          args={[CARD_WIDTH + 0.05, CARD_HEIGHT + 0.05, CARD_DEPTH]}
+          radius={0.07}
+          smoothness={4}
+          castShadow
+          receiveShadow
+        >
+          <primitive object={frameMat} attach="material" />
+        </RoundedBox>
+        {portraitMat && (
+          <mesh position={[0, 0, CARD_DEPTH / 2 + 0.006]} castShadow>
+            <planeGeometry args={[CARD_WIDTH, CARD_HEIGHT]} />
+            <primitive object={portraitMat} attach="material" />
+          </mesh>
+        )}
+        {def.isRoyal && (
+          <mesh position={[0, CARD_HEIGHT / 2 + 0.05, 0]} castShadow>
+            <torusGeometry args={[0.34, 0.03, 12, 48]} />
+            <meshStandardMaterial color="#ffffff" emissive="#ffffff" emissiveIntensity={0.4} />
+          </mesh>
+        )}
+      </group>
+
       {isSelected && (
-        <mesh position={[0, TILE_TOP_Y + 0.015, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-          <ringGeometry args={[0.49, 0.52, 48]} />
+        <mesh position={[0, TILE_TOP_Y + 0.012, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+          <ringGeometry args={[0.49, 0.54, 48]} />
           <meshBasicMaterial color="#90ee90" transparent opacity={0.9} depthWrite={false} />
         </mesh>
       )}
@@ -341,7 +483,9 @@ function Scene({
       <BaseBoard theme={theme} />
       {tiles.map((pos) => {
         const move = moveMap.get(posKey(pos));
-        const isSelectedTile = Boolean(selectedPiece && positionsEqual(selectedPiece.position, pos));
+        const isSelectedTile = Boolean(
+          selectedPiece && positionsEqual(selectedPiece.position, pos),
+        );
         const isEnemySelected = selectedPiece?.side === 'enemy';
         return (
           <TileHighlight
@@ -471,21 +615,30 @@ export function Board3D(props: Board3DProps) {
         <Canvas
           shadows
           gl={{ antialias: true, alpha: false, powerPreference: 'default' }}
-          style={{ background: '#fff0f5', width: '100%', height: '100%', borderRadius: '8px', display: 'block' }}
+          style={{
+            background: '#fff0f5',
+            width: '100%',
+            height: '100%',
+            borderRadius: '8px',
+            display: 'block',
+          }}
           camera={{ fov: 45, near: 0.1, far: 100, position: [0, 9, 8] }}
         >
           <color attach="background" args={['#fff0f5']} />
-          <ambientLight intensity={0.6} />
+          <ambientLight intensity={0.55} />
+          <hemisphereLight color="#ffe4ec" groundColor="#8b6b75" intensity={0.4} />
           <directionalLight
             position={[6, 12, 6]}
-            intensity={1.4}
+            intensity={1.3}
             castShadow
-            shadow-mapSize={[512, 512]}
-            shadow-camera-left={-6}
-            shadow-camera-right={6}
-            shadow-camera-top={6}
-            shadow-camera-bottom={-6}
+            shadow-mapSize={[1024, 1024]}
+            shadow-camera-left={-8}
+            shadow-camera-right={8}
+            shadow-camera-top={8}
+            shadow-camera-bottom={-8}
+            shadow-bias={-0.0005}
           />
+          <pointLight position={[-5, 6, -5]} intensity={0.5} color="#ffd1dc" />
           <Suspense fallback={<LoadingFallback />}>
             <Scene {...props} />
           </Suspense>

@@ -43,7 +43,9 @@ export function TournamentMap({ currentStageIndex, onSelectNode }: TournamentMap
                 key={node.id}
                 className={`map-node ${status}`}
                 style={{ left: `${node.x}%`, top: `${node.y}%` }}
-                onClick={() => node.matchIndex >= 0 && status !== 'locked' && onSelectNode(node.matchIndex)}
+                onClick={() =>
+                  node.matchIndex >= 0 && status !== 'locked' && onSelectNode(node.matchIndex)
+                }
                 type="button"
                 disabled={status === 'locked'}
               >
